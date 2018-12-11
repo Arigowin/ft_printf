@@ -3,6 +3,23 @@
 
 # include <string.h>
 
+
+typedef enum		e_type
+{
+	DFLT,
+	STR,
+	INT,
+	CHAR,
+	PTR
+}					t_type;
+
+typedef struct		s_lst
+{
+	void			*elt;
+	t_type			type;
+	char			*str;
+}					t_lst;
+
 int					ft_printf(const char *format, ...);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
