@@ -15,8 +15,10 @@ int			arg_s(va_list ap)
 int			arg_d(va_list ap)
 {
 	int			d;
+	void		*a;
 
-	d = va_arg(ap, int);
+	a = va_arg(ap, void *);
+	d = (int)a;
 	ft_putnbr(d);
 	return (ft_strlen(ft_itoa(d)));
 }
@@ -96,38 +98,86 @@ int			simple_flag_arg(va_list ap, const char *format, int *idx)
 	return (len);
 }
 
+void		print_lst(t_lst *lst)
+{
+	char	buff[13];
+
+	while (lst)
+	{
+		/* void			*elt; */
+		/* t_type			type; */
+		/* char			*str; */
+		ft_putstr("[");
+		if (lst->type == CHAR)
+			ft_putchar((char)lst->elt);
+		else if (lst->type == STR)
+			ft_putstr((char *)lst->elt);
+		else if (lst->type == INT)
+			ft_putnbr((int)lst->elt);
+		else if (lst->type == PTR)
+		{
+			ft_ptr_to_hex(lst->elt, &buff);
+			ft_putstr("0x");
+			ft_putstr(buff);
+		}
+		else
+			ft_putstr((char *)lst->elt);
+		ft_putstr(", ");
+		ft_putstr(lst->str);
+		ft_putstr(", ");
+		if (lst->type == CHAR)
+			ft_putstr("CHAR");
+		else if (lst->type == STR)
+			ft_putstr("STR");
+		else if (lst->type == PTR)
+			ft_putstr("PTR");
+		else if (lst->type == INT)
+			ft_putstr("INT");
+		else
+			ft_putstr("DFLT");
+		ft_putendl("]");
+		lst = lst->next;
+	}
+}
+
 int			ft_printf(const char *format, ...)
 {
 	va_list		ap;
-	int			len;
-	int			check;
-	int			idx;
+	t_lst		*lst;
+	/* int			len; */
+	/* int			check; */
+	/* int			idx; */
 
-	len = 0;
-	idx = 0;
+	/* len = 0; */
+	/* idx = 0; */
+	lst = NULL;
 	if (format == NULL || ft_strlen(format) == 0)
 	{
 		ft_putstr_fd("The firt arg cannot be NULL or empty\n", 2);
 		return (-1);
 	}
 	va_start(ap, format);
-	while (format[idx])
-	{
-		if (format[idx] != '%')
-		{
-			ft_putchar(format[idx]);
-			len++;
-		}
-		if (format[idx++] == '%')
-		{
-			len += simple_flag_arg(ap, format, &idx);
-			check = basic_arg(ap, format[idx]);
-			if (check == -1)
-				return (-1);
-			len += check;
-			idx++;
-		}
-	}
+	parse(&lst, ap, format);
+	print_lst(lst);
+
+	/* while (format[idx]) */
+	/* { */
+	/*     if (format[idx] != '%') */
+	/*     { */
+	/*         ft_putchar(format[idx]); */
+	/*         len++; */
+	/*     } */
+	/*     if (format[idx++] == '%') */
+	/*     { */
+	/*         len += simple_flag_arg(ap, format, &idx); */
+	/*         check = basic_arg(ap, format[idx]); */
+	/*         if (check == -1) */
+	/*             return (-1); */
+	/*         len += check; */
+	/*         idx++; */
+	/*     } */
+	/* } */
 	va_end(ap);
-	return (len);
+	/* return (len); */
+	return 0;
 }

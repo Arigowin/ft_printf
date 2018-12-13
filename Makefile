@@ -15,6 +15,9 @@ HPATH =		$(ROOT)/include
 CFLAGS = -Wall -Wextra -Werror -I $(HPATH) -fPIC
 
 SRC =	ft_strlen.c \
+		ft_strchr.c \
+		ft_strsub.c \
+		ft_strdel.c \
 		ft_bzero.c \
 		ft_memalloc.c \
 		ft_strnew.c \
@@ -31,6 +34,8 @@ SRC =	ft_strlen.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \
 		ft_putstr_fd.c \
+		chaining_list.c \
+		parsing.c \
 		ft_printf.c
 
 OBJ = $(patsubst %.c, $(OPATH)/%.o, $(SRC))
