@@ -24,6 +24,7 @@ typedef struct		s_lst
 int					ft_printf(const char *format, ...);
 
 void				parse(t_lst **lst, va_list ap, const char *format);
+int					print_all(t_lst *lst);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);

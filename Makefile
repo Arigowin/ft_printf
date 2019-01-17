@@ -36,6 +36,7 @@ SRC =	ft_strlen.c \
 		ft_putstr_fd.c \
 		chaining_list.c \
 		parsing.c \
+		print_all.c \
 		ft_printf.c
 
 OBJ = $(patsubst %.c, $(OPATH)/%.o, $(SRC))

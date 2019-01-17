@@ -46,7 +46,7 @@ void		parse(t_lst **lst, va_list ap, const char *format)
 				{
 					lst_add(lst, va_arg(ap, void *),
 							check_type(format[i]),
-							ft_strsub(format, start, (i - start) + 1));
+							ft_strsub(format, start + 1, (i - start)));
 					start = i + 1;
 					break ;
 				}
@@ -58,5 +58,3 @@ void		parse(t_lst **lst, va_list ap, const char *format)
 	if (i != start)
 		lst_add(lst, NULL, DFLT, ft_strsub(format, start, i - start));
 }
-
-/* lst_add(t_lst *lst, void *elt, t_type type, char *str); */
