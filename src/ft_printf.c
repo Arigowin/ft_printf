@@ -154,7 +154,7 @@ int			ft_printf(const char *format, ...)
 	}
 	va_start(ap, format);
 	parse(&lst, ap, format);
-	print_lst(lst);
+	/* print_lst(lst); */
 	len = print_all(lst);
 	va_end(ap);
 	return (len);

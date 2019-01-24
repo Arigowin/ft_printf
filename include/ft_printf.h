@@ -10,12 +10,18 @@ typedef enum		e_type
 	STR,
 	INT,
 	CHAR,
-	PTR
+	PTR,
+	OCT,
+	UINT,
+	LHEX,
+	UHEX,
+	FLT
 }					t_type;
 
 typedef struct		s_lst
 {
 	void			*elt;
+	double			flt;
 	t_type			type;
 	char			*str;
 	struct s_lst	*next;
@@ -35,8 +41,10 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(const char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putnbrendl(int n);
+void				ft_putupper(char const *s);
 
 t_lst				*lst_add(t_lst **lst, void *elt, t_type type, char *str);
+t_lst				*lst_add_flt(t_lst **lst, double elt, t_type type, char *str);
 void				lst_free(t_lst **lst);
 
 size_t				ft_strlen(const char *s);
@@ -50,5 +58,7 @@ void				ft_ptr_to_hex(const void *ptr, char (*res)[13]);
 void				ft_strdel(char **as);
 char				*ft_strsub(char const *s, size_t start, size_t len);
 char				*ft_strchr(const char *s, int c);
+char				*ft_itoa_base(int n, int base);
+int					ft_toupper(int c);
 
 #endif

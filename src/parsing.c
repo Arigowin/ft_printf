@@ -12,15 +12,15 @@ t_type		check_type(char c)
 	if (c == 'd')
 		return (INT);
 	if (c == 'i')
-		return (STR);
+		return (INT);
 	if (c == 'o')
-		return (STR);
+		return (OCT);
 	if (c == 'u')
-		return (STR);
+		return (UINT);
 	if (c == 'x')
-		return (STR);
+		return (LHEX);
 	if (c == 'X')
-		return (STR);
+		return (UHEX);
 	return (DFLT);
 }
 
@@ -46,6 +46,14 @@ void		parse(t_lst **lst, va_list ap, const char *format)
 				{
 					lst_add(lst, va_arg(ap, void *),
 							check_type(format[i]),
+							ft_strsub(format, start + 1, (i - start)));
+					start = i + 1;
+					break ;
+				}
+				if (ft_strchr("f", format[i]) != NULL)
+				{
+					lst_add_flt(lst, (double)va_arg(ap, double),
+							FLT,
 							ft_strsub(format, start + 1, (i - start)));
 					start = i + 1;
 					break ;

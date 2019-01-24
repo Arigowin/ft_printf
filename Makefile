@@ -12,7 +12,7 @@ OPATH =		$(ROOT)/obj
 CPATH =		$(ROOT)/src
 HPATH =		$(ROOT)/include
 
-CFLAGS = -Wall -Wextra -Werror -I $(HPATH) -fPIC
+CFLAGS = -Wall -Wextra -Werror -I $(HPATH) -fPIC -g
 
 SRC =	ft_strlen.c \
 		ft_strchr.c \
@@ -24,16 +24,19 @@ SRC =	ft_strlen.c \
 		ft_itoa.c \
 		ft_memcpy.c \
 		ft_memset.c \
+		ft_toupper.c \
 		ft_ptr_to_hex.c \
 		ft_putchar.c \
 		ft_putendl.c \
 		ft_putnbr.c \
 		ft_putnbrendl.c \
 		ft_putstr.c \
+		ft_putupper.c \
 		ft_putchar_fd.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \
 		ft_putstr_fd.c \
+		ft_itoa_base.c \
 		chaining_list.c \
 		parsing.c \
 		print_all.c \
