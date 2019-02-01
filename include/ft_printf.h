@@ -31,6 +31,8 @@ int					ft_printf(const char *format, ...);
 
 void				parse(t_lst **lst, va_list ap, const char *format);
 int					print_all(t_lst *lst);
+int					exec_type(t_lst *lst);
+int					exec_opt(t_lst *lst);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
@@ -49,6 +51,8 @@ void				lst_free(t_lst **lst);
 
 size_t				ft_strlen(const char *s);
 char				*ft_itoa(int n);
+char				*ft_itoa_base(int n, int base);
+int					ft_atoi(const char *str);
 char				*ft_strnew(size_t size);
 void				*ft_memalloc(size_t size);
 void				ft_bzero(void *s, size_t n);
@@ -58,7 +62,8 @@ void				ft_ptr_to_hex(const void *ptr, char (*res)[13]);
 void				ft_strdel(char **as);
 char				*ft_strsub(char const *s, size_t start, size_t len);
 char				*ft_strchr(const char *s, int c);
-char				*ft_itoa_base(int n, int base);
+char				*ft_strcat(char *s1, const char *s2);
+int					ft_isdigit(int c);
 int					ft_toupper(int c);
 
 #endif

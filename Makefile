@@ -22,9 +22,13 @@ SRC =	ft_strlen.c \
 		ft_memalloc.c \
 		ft_strnew.c \
 		ft_itoa.c \
+		ft_itoa_base.c \
+		ft_atoi.c \
+		ft_strcat.c \
 		ft_memcpy.c \
 		ft_memset.c \
 		ft_toupper.c \
+		ft_isdigit.c \
 		ft_ptr_to_hex.c \
 		ft_putchar.c \
 		ft_putendl.c \
@@ -36,9 +40,10 @@ SRC =	ft_strlen.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \
 		ft_putstr_fd.c \
-		ft_itoa_base.c \
 		chaining_list.c \
 		parsing.c \
+		option.c \
+		convert.c \
 		print_all.c \
 		ft_printf.c
 
