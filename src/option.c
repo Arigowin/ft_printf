@@ -81,6 +81,11 @@ int			opt_s(t_lst *lst)
 	return (len);
 }
 
+int			opt_i(t_lst *lst)
+{
+	return (0);
+}
+
 int			exec_opt(t_lst *lst)
 {
 	int			len;
@@ -89,6 +94,10 @@ int			exec_opt(t_lst *lst)
 	if (lst->type == STR)
 	{
 		len = opt_s(lst);
+	}
+	if (lst->type == INT)
+	{
+		len = opt_i(lst);
 	}
 	return (len);
 }
