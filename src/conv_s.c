@@ -12,17 +12,15 @@ void		add_n_char(char **str, char c, int n)
 	}
 }
 
-int			precision(char **buff, t_lst *lst, int dir, int width)
+int			pr(char **buff, t_lst *lst, int dir, int width, int precision)
 {
 	char		*str;
-	int 		precision;
 	int			i;
 	int			j;
 
 	i = 0;
 	j = 0;
 	str = (char *)lst->elt;
-	precision = ft_atoi(ft_strchr(lst->str, '.') + 1);
 	if (dir == 0 && width > 0)
 		j = width - precision;
 	while (i < precision && i < (int)ft_strlen(str))
@@ -54,15 +52,14 @@ int			cat(char **buff, t_lst *lst, int dir, int width)
 	return (ft_strlen(*buff));
 }
 
-int			opt_s(t_lst *lst)
+int			conv_s(t_lst *lst, int width, int precision)
 {
 	char		*buff;
 	int			dir;
-	int			width;
 	int			len;
 
 	dir = 0;
-	if ((width = ft_atoi(lst->str)) < 0)
+	if (width < 0)
 	{
 		dir++;
 		width = -width;
@@ -71,34 +68,13 @@ int			opt_s(t_lst *lst)
 					+ ft_strlen(lst->elt) * sizeof(char))))
 		return (-1);
 	add_n_char(&buff, ' ', width);
-	if (ft_strchr(lst->str, '.'))
-		precision(&buff, lst, dir, width);
+	if (precision > 0 && ft_strlen(lst->elt) > 0)
+		pr(&buff, lst, dir, width, precision);
 	else
 		cat(&buff, lst, dir, width);
 	len = ft_strlen(buff);
 	ft_putstr(buff);
 	free(buff);
-	return (len);
-}
-
-int			opt_i(t_lst *lst)
-{
-	return (0);
-}
-
-int			exec_opt(t_lst *lst)
-{
-	int			len;
-
-	len = 0;
-	if (lst->type == STR)
-	{
-		len = opt_s(lst);
-	}
-	if (lst->type == INT)
-	{
-		len = opt_i(lst);
-	}
 	return (len);
 }
 

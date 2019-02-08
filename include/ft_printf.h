@@ -2,7 +2,7 @@
 # define FT_PRINTF_H
 
 # include <string.h>
-#include <stdarg.h>
+# include <stdarg.h>
 
 typedef enum		e_type
 {
@@ -31,8 +31,8 @@ int					ft_printf(const char *format, ...);
 
 void				parse(t_lst **lst, va_list ap, const char *format);
 int					print_all(t_lst *lst);
-int					exec_type(t_lst *lst);
-int					exec_opt(t_lst *lst);
+int					conversion_manager(t_lst *lst, int width, int precision);
+int					conv_s(t_lst *lst, int width, int precision);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);

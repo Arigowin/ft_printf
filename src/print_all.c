@@ -2,34 +2,62 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-int			get_width(char **str, int *dir)
+int			get_width(char **str)
 {
 	int		width;
-
-	*dir  = 0;
-	if ((width = ft_atoi(*str)) < 0)
-	{
-		width = -width;
-		*dir = 1;
-	}
 	int		i;
+	int		j;
 
-	// remove width of str
 	i = 0;
-	while (i < (int)ft_strlen(*str) && (*str)[i] <= '9' && (*str)[i] >= '1')
-	{
-
-	}
+	while (i < (int)ft_strlen(*str) && ((*str)[i] == '-' || (*str)[i] == '+'))
+		i++;
+	if ((j = i - 1) < 0)
+		j = 0;
+	width = ft_atoi(*str + j);
 	return (width);
 }
 
 int			get_precision(char **str)
 {
-	int precision;
+	int		precision;
+	char	*tmp;
 
-	precision = ft_atoi(ft_strchr(*str, '.') + 1);
-	// remove '.' and precision of str
+	tmp = ft_strchr(*str, '.');
+	if  (tmp == NULL)
+		return (0);
+	precision = ft_atoi(tmp + 1);
 	return (precision);
+}
+
+void		remove_width_and_precision(char **str)
+{
+	int		i;
+	int		j;
+	char	*new;
+
+	i = 0;
+	j = 0;
+	if ((new = ft_strnew(ft_strlen(*str))) == NULL)
+		return;
+	while (i < (int)ft_strlen(*str) && ((*str)[i] == '-' || (*str)[i] == '+'))
+	{
+		new[j] = (*str)[i];
+		i++;
+		j++;
+	}
+	if (j != 0)
+		j--;
+	while (i < (int)ft_strlen(*str) && (((*str)[i] <= '9' && (*str)[i] >= '0')
+				|| (*str)[i] == '.'))
+		i++;
+	while(i < (int)ft_strlen(*str))
+	{
+		new[j] = (*str)[i];
+		i++;
+		j++;
+	}
+	free(*str);
+	*str = new;
 }
 
 int			print_all(t_lst *lst)
@@ -39,30 +67,20 @@ int			print_all(t_lst *lst)
 	int			tmp_len;
 	int			width;
 	int			precision;
-	int			dir;
 
 	tmp = lst;
 	len = 0;
 	while (tmp)
 	{
-		width = get_width(&(lst->str), &dir);
-		precision = get_precision(&(lst->str));
-		// gestion des flags avec une finite state automaton
-		// puis execution de la conversion avec prise en compte de width, precision et flags
+		width = get_width(&(tmp->str));
+		precision = get_precision(&(tmp->str));
+		if (width != 0 || precision != 0)
+			remove_width_and_precision(&(tmp->str));
+		// execution de la conversion avec prise en compte de width, precision et flags
+		if ((tmp_len = conversion_manager(tmp, width, precision)) < 0)
+			return (tmp_len);
+		len += tmp_len;
 		tmp = tmp->next;
 	}
 	return (len);
 }
-
-/* if (ft_strlen(tmp->str) == 1 || tmp->type == DFLT) */
-/* { // no option */
-/*     if ((tmp_len = exec_type(tmp)) == -1) */
-/*         return (-1); */
-/*     len += tmp_len; */
-/* } */
-/* else */
-/* { // option */
-/*     if ((tmp_len = exec_opt(tmp)) == -1) */
-/*         return (-1); */
-/*     len += tmp_len; */
-/* } */

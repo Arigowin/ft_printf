@@ -42,8 +42,8 @@ SRC =	ft_strlen.c \
 		ft_putstr_fd.c \
 		chaining_list.c \
 		parsing.c \
-		option.c \
-		convert.c \
+		conv_s.c \
+		conversion_manager.c \
 		print_all.c \
 		ft_printf.c
 

@@ -10,51 +10,55 @@ int		main(void)
 
 	setbuf(stdout, NULL);
 
-	printf("-----------------------\n");
-	ft_printf("%-10s is a string\n", "this");
-	printf("%-10s is a string\n", "this");
-	printf("-----------------------\n");
-	ft_printf("%-.2s is a string\n", "this");
-	printf("%-.2s is a string\n", "this");
-	printf("-----------------------\n");
-	ft_printf("%-5.2s is a string\n", "this");
-	printf("%-5.2s is a string\n", "this");
-	printf("-----------------------\n");
-	ft_printf("%-10s is a string\n", "");
-	printf("%-10s is a string\n", "");
-	printf("-----------------------\n");
-	ft_printf("%-.2s is a string\n", "");
-	printf("%-.2s is a string\n", "");
-	printf("-----------------------\n");
-	ft_printf("%-5.2s is a string\n", "");
-	printf("%-5.2s is a string\n", "");
-	printf("-----------------------\n");
+	/* printf("-----------------------\n"); */
+	/* ft_printf("%-10s is a string\n", "this"); */
+	/* printf("%-10s is a string\n", "this"); */
+	/* printf("-----------------------\n"); */
+	/* ft_printf("%-.2s is a string\n", "this"); */
+	/* printf("%-.2s is a string\n", "this"); */
+	/* printf("-----------------------\n"); */
+	/* ft_printf("%-5.2s is a string\n", "this"); */
+	/* printf("%-5.2s is a string\n", "this"); */
+	/* printf("-----------------------\n"); */
+	/* ft_printf("%-10s is a string\n", ""); */
+	/* printf("%-10s is a string\n", ""); */
+	/* printf("-----------------------\n"); */
+	/* ft_printf("%-.2s is a string\n", ""); */
+	/* printf("%-.2s is a string\n", ""); */
+	/* printf("-----------------------\n"); */
+	/* ft_printf("%-5.2s is a string\n", ""); */
+	/* printf("%-5.2s is a string\n", ""); */
+	/* printf("-----------------------\n"); */
+	/* ft_printf("%+-10d is a string\n", 42); */
+	/* printf("%+-10d is a string\n", 42); */
+	/* printf("-----------------------\n"); */
 
+	ft_printf("1234");
 	/* printf("-----------------------\n"); */
 	/* r1 = ft_printf("[%4s]\n", "abcdef"); */
 	/* r2 = printf("[%4s]\n", "abcdef"); */
 	/* printf("\nMy %d, %d\n", r1, r2); */
-	/*  */
+    /*  */
 	/* printf("-----------------------\n"); */
 	/* r1 = ft_printf("[%10.2s]\n", "abcdef"); */
 	/* r2 = printf("[%10.2s]\n", "abcdef"); */
 	/* printf("\nMy %d, %d\n", r1, r2); */
-	/*  */
+    /*  */
 	/* printf("-----------------------\n"); */
 	/* r1 = ft_printf("[%10s]\n", "abcdef"); */
 	/* r2 = printf("[%10s]\n", "abcdef"); */
 	/* printf("\nMy %d, %d\n", r1, r2); */
-	/*  */
+    /*  */
 	/* printf("-----------------------\n"); */
 	/* r1 = ft_printf("[%.2s]\n", "abcdef"); */
 	/* r2 = printf("[%.2s]\n", "abcdef"); */
 	/* printf("\nMy %d, %d\n", r1, r2); */
-	/*  */
+    /*  */
 	/* printf("-----------------------\n"); */
 	/* r1 = ft_printf("[%s]\n", "abcdef"); */
 	/* r2 = printf("[%s]\n", "abcdef"); */
 	/* printf("\nMy %d, %d\n", r1, r2); */
-
+    /*  */
 	/* printf("-----------------------\n"); */
 	/* r1 = ft_printf("abc\n"); */
 	/* r2 = printf("abc\n"); */
