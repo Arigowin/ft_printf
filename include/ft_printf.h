@@ -33,6 +33,7 @@ void				parse(t_lst **lst, va_list ap, const char *format);
 int					print_all(t_lst *lst);
 int					conversion_manager(t_lst *lst, int width, int precision);
 int					conv_s(t_lst *lst, int width, int precision);
+int					conv_d(t_lst *lst, int width, int precision);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
@@ -65,5 +66,6 @@ char				*ft_strchr(const char *s, int c);
 char				*ft_strcat(char *s1, const char *s2);
 int					ft_isdigit(int c);
 int					ft_toupper(int c);
+void				ft_print_n_char(char c, int n);
 
 #endif

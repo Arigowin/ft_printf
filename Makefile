@@ -40,9 +40,11 @@ SRC =	ft_strlen.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \
 		ft_putstr_fd.c \
+		ft_print_n_char.c \
 		chaining_list.c \
 		parsing.c \
 		conv_s.c \
+		conv_d.c \
 		conversion_manager.c \
 		print_all.c \
 		ft_printf.c

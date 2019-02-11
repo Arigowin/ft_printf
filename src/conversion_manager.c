@@ -9,27 +9,6 @@ int			no_conv(t_lst *lst, int width, int precision)
 	return (ft_strlen(lst->str));
 }
 
-int			conv_d(t_lst *lst, int width, int precision)
-{
-	(void)lst;
-	(void)width;
-	(void)precision;
-
-	return (0);
-}
-
-void		print_n_char(char c, int n)
-{
-	int		i;
-
-	i = 0;
-	while(i < n)
-	{
-		ft_putchar(c);
-		i++;
-	}
-}
-
 int			conv_c(t_lst *lst, int width, int precision)
 {
 	int			len;
@@ -38,13 +17,13 @@ int			conv_c(t_lst *lst, int width, int precision)
 	(void)precision;
 	if (width > 0)
 	{
-		print_n_char(' ', width - 1);
+		ft_print_n_char(' ', width - 1);
 		len = width;
 	}
 	ft_putchar((char)lst->elt);
 	if (width < 0)
 	{
-		print_n_char(' ', (-width) - 1);
+		ft_print_n_char(' ', (-width) - 1);
 		len = -width;
 	}
 	return (len);
