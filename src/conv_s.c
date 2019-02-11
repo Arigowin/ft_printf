@@ -12,7 +12,7 @@ void		add_n_char(char **str, char c, int n)
 	}
 }
 
-int			pr(char **buff, t_lst *lst, int dir, int width, int precision)
+int			reduce(char **buff, t_lst *lst, int dir, int width, int precision)
 {
 	char		*str;
 	int			i;
@@ -32,7 +32,7 @@ int			pr(char **buff, t_lst *lst, int dir, int width, int precision)
 	return (ft_strlen(*buff));
 }
 
-int			cat(char **buff, t_lst *lst, int dir, int width)
+int			ft_cat(char **buff, t_lst *lst, int dir, int width)
 {
 	char		*str;
 	int			i;
@@ -64,15 +64,19 @@ int			conv_s(t_lst *lst, int width, int precision)
 		dir++;
 		width = -width;
 	}
-	if (NULL == (buff = ft_strnew(1 + width
-					+ ft_strlen(lst->elt) * sizeof(char))))
+	if (NULL == (buff = ft_strnew(1 + width + ft_strlen(lst->elt) * sizeof(char))))
 		return (-1);
 	add_n_char(&buff, ' ', width);
 	if (precision > 0 && ft_strlen(lst->elt) > 0)
-		pr(&buff, lst, dir, width, precision);
+		reduce(&buff, lst, dir, width, precision);
 	else
-		cat(&buff, lst, dir, width);
+		ft_cat(&buff, lst, dir, width);
 	len = ft_strlen(buff);
+	if (lst->elt == NULL)
+	{
+		ft_putstr("(null)");
+		return (6);
+	}
 	ft_putstr(buff);
 	free(buff);
 	return (len);

@@ -8,9 +8,9 @@ int			ft_printf(const char *format, ...)
 	int			len;
 
 	lst = NULL;
-	if (format == NULL || ft_strlen(format) == 0)
+	if (format == NULL)
 	{
-		ft_putstr_fd("The firt arg cannot be NULL or empty\n", 2);
+		ft_putstr_fd("The firt arg cannot be NULL\n", 2);
 		return (-1);
 	}
 	va_start(ap, format);

@@ -70,12 +70,17 @@ int			print_all(t_lst *lst)
 
 	tmp = lst;
 	len = 0;
+	width = 0;
+	precision = 0;
 	while (tmp)
 	{
-		width = get_width(&(tmp->str));
-		precision = get_precision(&(tmp->str));
-		if (width != 0 || precision != 0)
-			remove_width_and_precision(&(tmp->str));
+		if (tmp->type != DFLT)
+		{
+			width = get_width(&(tmp->str));
+			precision = get_precision(&(tmp->str));
+			if (width != 0 || precision != 0)
+				remove_width_and_precision(&(tmp->str));
+		}
 		// execution de la conversion avec prise en compte de width, precision et flags
 		if ((tmp_len = conversion_manager(tmp, width, precision)) < 0)
 			return (tmp_len);

@@ -42,7 +42,8 @@ void		parse(t_lst **lst, va_list ap, const char *format)
 			}
 			while (format[i])
 			{
-				if (ft_strchr("cspdiouxX", format[i]) != NULL)
+				i++;
+				if (ft_strchr("cspdiouxX%", format[i]) != NULL)
 				{
 					lst_add(lst, va_arg(ap, void *),
 							check_type(format[i]),
@@ -58,7 +59,6 @@ void		parse(t_lst **lst, va_list ap, const char *format)
 					start = i + 1;
 					break ;
 				}
-				i++;
 			}
 		}
 		i++;
