@@ -29,8 +29,6 @@ int			get_precision(char **str)
 	return (precision);
 }
 
-#include <stdio.h>
-
 void		remove_width_and_precision(char **str)
 {
 	int		i;

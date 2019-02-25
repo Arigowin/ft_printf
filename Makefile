@@ -41,6 +41,10 @@ SRC =	ft_strlen.c \
 		ft_putnbr_fd.c \
 		ft_putstr_fd.c \
 		ft_print_n_char.c \
+		ft_add_n_char.c \
+		ft_add_char_front.c \
+		ft_add_char_back.c \
+		ft_remove_char.c \
 		chaining_list.c \
 		parsing.c \
 		conv_s.c \

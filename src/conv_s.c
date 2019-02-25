@@ -1,17 +1,6 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-void		add_n_char(char **str, char c, int n)
-{
-	int		i;
-	i = 0;
-	while (str && *str && i < n)
-	{
-		(*str)[i] = c;
-		i++;
-	}
-}
-
 int			reduce(char **buff, t_lst *lst, int dir, int width, int precision)
 {
 	char		*str;
@@ -66,7 +55,7 @@ int			conv_s(t_lst *lst, int width, int precision)
 	}
 	if (NULL == (buff = ft_strnew(1 + width + ft_strlen(lst->elt) * sizeof(char))))
 		return (-1);
-	add_n_char(&buff, ' ', width);
+	ft_add_n_char(&buff, ' ', width);
 	if (precision > 0 && ft_strlen(lst->elt) > 0)
 		reduce(&buff, lst, dir, width, precision);
 	else

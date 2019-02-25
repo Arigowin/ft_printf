@@ -67,5 +67,9 @@ char				*ft_strcat(char *s1, const char *s2);
 int					ft_isdigit(int c);
 int					ft_toupper(int c);
 void				ft_print_n_char(char c, int n);
+void				ft_add_n_char(char **str, char c, int n);
+void				ft_add_char_front(char c, char **str, int nb, int len);
+void				ft_add_char_back(char c, char **str, int nb, int start);
+int					ft_remove_char(char c, char **str);
 
 #endif
