@@ -10,4 +10,5 @@ void		ft_add_char_back(char c, char **str, int nb, int start)
 		(*str)[start + i] = c;
 		i++;
 	}
+	(*str)[start + i] = '\0';
 }

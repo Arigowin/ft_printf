@@ -41,7 +41,7 @@ char		*add_syb(char c, char *str)
 	return (buff);
 }
 
-void		add_char(t_lst *lst, char **str, int width, int precision)
+void		add_char_d(t_lst *lst, char **str, int width, int precision)
 {
 	int		len;
 
@@ -85,7 +85,7 @@ int			conv_d(t_lst *lst, int width, int precision)
 		width = width - (syb[1] ? syb[1] : syb[0]);
 	else
 		width = width + (syb[1] ? syb[1] : syb[0]);
-	add_char(lst, &str, width, precision);
+	add_char_d(lst, &str, width, precision);
 	add_symbole(lst, &str, width, syb);
 	ft_putstr(str);
 	len = ft_strlen(str);

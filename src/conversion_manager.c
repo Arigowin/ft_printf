@@ -40,13 +40,13 @@ int			conv_p(t_lst *lst, int width, int precision)
 
 int			conversion_manager(t_lst *lst, int width, int precision)
 {
-	int		(*fct[5])(t_lst *, int, int) = {no_conv, conv_s, conv_d, conv_c,
-		conv_p};
+	int		(*fct[10])(t_lst *, int, int) = {no_conv, conv_s, conv_d, conv_c,
+		conv_p, conv_o, conv_u, conv_x, conv_x, NULL};
 	int		len;
 
 	len = 0;
 	// SEGFAULT FOR NOW REMOVE THIS AFTER ADD OTHER FLAGS
-	if (lst->type > 4)
+	if (lst->type > 9 || lst->type == FLT)
 		return (-1);
 	len = fct[lst->type](lst, width, precision);
 	return (len);

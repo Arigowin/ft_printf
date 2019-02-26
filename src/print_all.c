@@ -5,16 +5,32 @@
 int			get_width(char **str)
 {
 	int		width;
+	int		sign;
 	int		i;
 	int		j;
 
+	sign = 1;
 	i = 0;
-	while (i < (int)ft_strlen(*str) && ((*str)[i] == '-' || (*str)[i] == '+' || (*str)[i] == '0'))
+	if (ft_strchr(*str, '-'))
+		sign = -sign;
+	while (i < (int)ft_strlen(*str) && (!ft_isdigit((*str)[i])
+				|| (*str)[i] == '0') && (*str)[i] != '.')
 		i++;
-	if ((j = i - 1) < 0)
-		j = 0;
+	if ((*str)[i - 1] == '-' || (*str)[i - 1] == '+' || (*str)[i - 1] == '0')
+	{
+		if ((j = i - 1) < 0)
+			j = 0;
+		if (j > 0 && (*str)[i - 1] == '0')
+			j--;
+		if ((*str)[j] == '#')
+			j++;
+	}
+	else
+		j = i;
 	width = ft_atoi(*str + j);
-	return (width);
+	if (width < 0)
+		width = -width;
+	return (width == 0 ? width : width * sign);
 }
 
 int			get_precision(char **str)
@@ -45,8 +61,6 @@ void		remove_width_and_precision(char **str)
 		i++;
 		j++;
 	}
-	/* if (j != 0 && (new[j - 1] == '-' || new[j - 1] == '+')) */
-	/*     j--; */
 	while (i < (int)ft_strlen(*str) && (((*str)[i] <= '9' && (*str)[i] >= '0')
 				|| (*str)[i] == '.'))
 		i++;

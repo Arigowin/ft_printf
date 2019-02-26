@@ -45,10 +45,15 @@ SRC =	ft_strlen.c \
 		ft_add_char_front.c \
 		ft_add_char_back.c \
 		ft_remove_char.c \
+		ft_prntnum.c \
 		chaining_list.c \
 		parsing.c \
+		utiles.c \
 		conv_s.c \
 		conv_d.c \
+		conv_x.c \
+		conv_o.c \
+		conv_u.c \
 		conversion_manager.c \
 		print_all.c \
 		ft_printf.c

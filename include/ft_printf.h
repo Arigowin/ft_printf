@@ -34,6 +34,12 @@ int					print_all(t_lst *lst);
 int					conversion_manager(t_lst *lst, int width, int precision);
 int					conv_s(t_lst *lst, int width, int precision);
 int					conv_d(t_lst *lst, int width, int precision);
+int					conv_x(t_lst *lst, int width, int precision);
+int					conv_o(t_lst *lst, int width, int precision);
+int					conv_u(t_lst *lst, int width, int precision);
+
+
+void				add_char(t_lst *lst, char **str, int width, int precision);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
@@ -47,7 +53,7 @@ void				ft_putnbrendl(int n);
 void				ft_putupper(char const *s);
 
 t_lst				*lst_add(t_lst **lst, void *elt, t_type type, char *str);
-t_lst				*lst_add_flt(t_lst **lst, double elt, t_type type, char *str);
+t_lst				*lst_add_flt(t_lst **lst, double e, t_type t, char *str);
 void				lst_free(t_lst **lst);
 
 size_t				ft_strlen(const char *s);
@@ -71,5 +77,6 @@ void				ft_add_n_char(char **str, char c, int n);
 void				ft_add_char_front(char c, char **str, int nb, int len);
 void				ft_add_char_back(char c, char **str, int nb, int start);
 int					ft_remove_char(char c, char **str);
+void				ft_prntnum(unsigned long n, int b, char s, char *o);
 
 #endif
