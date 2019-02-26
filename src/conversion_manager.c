@@ -31,11 +31,23 @@ int			conv_c(t_lst *lst, int width, int precision)
 
 int			conv_p(t_lst *lst, int width, int precision)
 {
-	(void)lst;
 	(void)width;
 	(void)precision;
+	char		buff[15];
 
-	return (0);
+	if (lst->elt == NULL)
+	{
+		ft_putstr("(nil)");
+		return (5);
+	}
+	ft_ptr_to_hex(lst->elt, &buff);
+	int			i;
+	i = 0;
+	while (buff[i] == '0')
+		i++;
+	ft_putstr("0x");
+	ft_putstr(buff + i);
+	return (ft_strlen(buff + i) + 2);
 }
 
 int			conversion_manager(t_lst *lst, int width, int precision)
