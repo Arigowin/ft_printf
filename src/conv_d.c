@@ -5,6 +5,8 @@ char		*alloc_buff(char *str, int width, int precision)
 {
 	char	*buff;
 
+	if (width < 0)
+		width = -width;
 	if (width + precision > (int)ft_strlen(str))
 		buff = ft_strnew(width + precision);
 	else
@@ -41,23 +43,6 @@ char		*add_syb(char c, char *str)
 	return (buff);
 }
 
-void		add_char_d(t_lst *lst, char **str, int width, int precision)
-{
-	int		len;
-
-	len = (int)ft_strlen(*str);
-	if (precision)
-		ft_add_char_front('0', str, precision, len);
-	len = (int)ft_strlen(*str);
-	if (width && !precision && width > len && (lst->str)[0] == '0')
-		ft_add_char_front('0', str, width, len);
-	else if (width && width > len)
-		ft_add_char_front(' ', str, width, len);
-	len = (int)ft_strlen(*str);
-	if (width < 0)
-		ft_add_char_back(' ', str, (-width) - len, len);
-}
-
 void		add_symbole(t_lst *lst, char **str, int width, int syb[2])
 {
 	if (syb[0])
@@ -74,9 +59,9 @@ int			conv_d(t_lst *lst, int width, int precision)
 	int		len;
 	int		syb[2];
 
+	str = alloc_buff(ft_itoa((int)lst->elt), width, precision);
 	if (width > 0 && lst->str[0] == '-')
 		width = -width;
-	str = alloc_buff(ft_itoa((int)lst->elt), width, precision);
 	syb[0] = ft_remove_char('-', &str);
 	syb[1] = ft_remove_char('+', &str);
 	syb[1] = (ft_strchr(lst->str, '+') ? 1 : syb[1]);
@@ -85,7 +70,7 @@ int			conv_d(t_lst *lst, int width, int precision)
 		width = width - (syb[1] ? syb[1] : syb[0]);
 	else
 		width = width + (syb[1] ? syb[1] : syb[0]);
-	add_char_d(lst, &str, width, precision);
+	add_char(lst, &str, width, precision);
 	add_symbole(lst, &str, width, syb);
 	ft_putstr(str);
 	len = ft_strlen(str);

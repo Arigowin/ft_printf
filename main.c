@@ -15,17 +15,17 @@ int		main(void)
 	/* printf("%d, %d\n", r1, r2); */
 	/* printf("-------------------------------------\n"); */
 
+	/* printf("-------------------------------------\n"); */
+	/* r2 = printf("%4.15s\n", "I am 42"); */
+	/* r1 = ft_printf("%4.15s\n", "I am 42"); */
+	/* printf("%d, %d\n", r1, r2); */
+	/* printf("-------------------------------------\n"); */
+	/* r2 = printf("%4.15s\n", "42 is the answer"); */
+	/* r1 = ft_printf("%4.15s\n", "42 is the answer"); */
+	/* printf("%d, %d\n", r1, r2); */
 	printf("-------------------------------------\n");
-	r1 = ft_printf("%4.15s\n", "I am 42");
-	r2 = printf("%4.15s\n", "I am 42");
-	printf("%d, %d\n", r1, r2);
-	printf("-------------------------------------\n");
-	r1 = ft_printf("%4.15s\n", "42 is the answer");
-	r2 = printf("%4.15s\n", "42 is the answer");
-	printf("%d, %d\n", r1, r2);
-	printf("-------------------------------------\n");
-	r1 = ft_printf("{%-30d}\n", 10000);
 	r2 = printf("{%-30d}\n", 10000);
+	r1 = ft_printf("{%-30d}\n", 10000);
 	printf("%d, %d\n", r1, r2);
 	printf("-------------------------------------\n");
 	return (0);
