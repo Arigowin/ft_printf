@@ -21,6 +21,8 @@ t_type		check_type(char c)
 		return (LHEX);
 	if (c == 'X')
 		return (UHEX);
+	if (c == '%')
+		return (PCT);
 	return (DFLT);
 }
 

@@ -51,9 +51,11 @@ SRC =	ft_strlen.c \
 		utiles.c \
 		conv_s.c \
 		conv_d.c \
-		conv_x.c \
+		conv_c.c \
+		conv_p.c \
 		conv_o.c \
 		conv_u.c \
+		conv_x.c \
 		conversion_manager.c \
 		print_all.c \
 		ft_printf.c

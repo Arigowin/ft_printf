@@ -5,14 +5,14 @@ static char		ft_itolet(unsigned int nb)
 	return (nb + 'a' - 10);
 }
 
-static int		ft_puttbl_base(unsigned int n, char *t, char **str, size_t base)
+static int		ft_puttbl_base(unsigned int n, char *t, char **str, size_t b)
 {
 	int	i;
 
-	if (n > base - 1)
+	if (n > b - 1)
 	{
 		t[0] += 1;
-		i = ft_puttbl_base(n / base, t, str, base);
+		i = ft_puttbl_base(n / b, t, str, b);
 	}
 	else
 	{
@@ -21,10 +21,10 @@ static int		ft_puttbl_base(unsigned int n, char *t, char **str, size_t base)
 	}
 	if (*str != NULL)
 	{
-		if (base > 10 && (n % base) > 9)
-			(*str)[i] = ft_itolet(n % base);
+		if (b > 10 && (n % b) > 9)
+			(*str)[i] = ft_itolet(n % b);
 		else
-			(*str)[i] = (n % base) + '0';
+			(*str)[i] = (n % b) + '0';
 	}
 	return (i + 1);
 }

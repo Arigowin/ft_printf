@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-void		add_x(char **str, int width)
+void		add_x(char **str, int wth)
 {
 	char	*buff;
 	int		i;
@@ -9,9 +9,10 @@ void		add_x(char **str, int width)
 	int		len;
 
 	i = 0;
-	if (width <= 0)
+	if (wth <= 0)
 	{
-		len = (!width ? ft_strlen(*str) + 2 : ft_strlen(*str));
+		len = (wth != 0 ? ft_strlen(*str) + (-wth - (int)ft_strlen(*str))
+				: ft_strlen(*str) + 2);
 		buff = ft_strnew(len);
 		j = 2;
 		while (j < len)
@@ -20,32 +21,42 @@ void		add_x(char **str, int width)
 		buff[1] = 'x';
 		free(*str);
 		*str = buff;
+		return ;
 	}
-	else
-	{
-		while (!ft_isdigit((*str)[i]))
-			i++;
-		(*str)[(i < 1 ? 0 : i - 2)] = '0';
-		(*str)[(i < 1 ? 1 : i - 1)] = 'x';
-	}
+	while (!ft_isdigit((*str)[i]))
+		i++;
+	(*str)[(i < 1 ? 0 : i - 2)] = '0';
+	(*str)[(i < 1 ? 1 : i - 1)] = 'x';
 }
 
-int			conv_x(t_lst *lst, int width, int precision)
+void		more_x(t_lst *lst, char **str, unsigned long long int nb, int prc, int wth)
+{
+	if (prc == 0 && ft_strchr(lst->str, '.')
+			&& nb == 0 && wth != 0)
+		ft_memset(*str, ' ', ft_strlen(*str));
+	else if (prc == 0 && ft_strchr(lst->str, '.')
+			&& nb == 0)
+		ft_bzero(*str, ft_strlen(*str));
+}
+
+int			conv_x(t_lst *lst, int wth, int prc)
 {
 	char				*str;
 	int					len;
-	unsigned int		nb;
+	unsigned long long int		nb;
 	int					w;
 
 	len = 0;
 	nb = (unsigned int)lst->elt;
-	w = (width < 0 ? -width : width);
-	str = (w + precision != 0 ? ft_strnew(w + precision) : ft_strnew(13));
+	w = (wth < 0 ? -wth : wth);
+	str = (w + prc != 0 ? ft_strnew(w + prc) : ft_strnew(20));
 	ft_prntnum(nb, 16, ' ', str);
-	precision = (precision <  (int)ft_strlen(str) ? 0 : precision);
-	add_char(lst, &str, width, precision);
-	if (lst->str[0] == '#' && nb > 0)
-		add_x(&str, width);
+	prc = (prc <  (int)ft_strlen(str) ? 0 : prc);
+	if (!ft_strchr(lst->str, '#') || (int)ft_strlen(str) + 2 <= w)
+		add_char(lst, &str, wth, prc);
+	if (ft_strchr(lst->str, '#') && nb > 0)
+		add_x(&str, wth);
+	more_x(lst, &str, nb, prc, wth);
 	if (lst->type == LHEX)
 		ft_putstr(str);
 	else

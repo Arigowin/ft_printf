@@ -15,7 +15,8 @@ typedef enum		e_type
 	UINT,
 	LHEX,
 	UHEX,
-	FLT
+	FLT,
+	PCT
 }					t_type;
 
 typedef struct		s_lst
@@ -31,15 +32,16 @@ int					ft_printf(const char *format, ...);
 
 void				parse(t_lst **lst, va_list ap, const char *format);
 int					print_all(t_lst *lst);
-int					conversion_manager(t_lst *lst, int width, int precision);
-int					conv_s(t_lst *lst, int width, int precision);
-int					conv_d(t_lst *lst, int width, int precision);
-int					conv_x(t_lst *lst, int width, int precision);
-int					conv_o(t_lst *lst, int width, int precision);
-int					conv_u(t_lst *lst, int width, int precision);
+int					conversion_manager(t_lst *lst, int wth, int prc);
+int					conv_s(t_lst *lst, int wth, int prc);
+int					conv_d(t_lst *lst, int wth, int prc);
+int					conv_c(t_lst *lst, int wth, int prc);
+int					conv_p(t_lst *lst, int wth, int prc);
+int					conv_o(t_lst *lst, int wth, int prc);
+int					conv_u(t_lst *lst, int wth, int prc);
+int					conv_x(t_lst *lst, int wth, int prc);
 
-
-void				add_char(t_lst *lst, char **str, int width, int precision);
+void				add_char(t_lst *lst, char **str, int wth, int prc);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-void		add_o(char **str, int width)
+void		add_o(char **str, int wth)
 {
 	char	*buff;
 	int		i;
@@ -9,9 +9,9 @@ void		add_o(char **str, int width)
 	int		len;
 
 	i = 0;
-	if (width <= 0)
+	if (wth <= 0)
 	{
-		len = (!width ? ft_strlen(*str) + 1 : ft_strlen(*str));
+		len = (!wth ? ft_strlen(*str) + 1 : ft_strlen(*str));
 		buff = ft_strnew(len);
 		j = 1;
 		while (j < len)
@@ -28,7 +28,19 @@ void		add_o(char **str, int width)
 	}
 }
 
-int			conv_o(t_lst *lst, int width, int precision)
+void		more_o(t_lst *lst, char **str, int prc, int wth)
+{
+	if (prc == 0 && ft_strchr(lst->str, '.')
+			&& (unsigned int)lst->elt == 0 && wth != 0)
+		ft_memset(*str, ' ', ft_strlen(*str));
+	else if (prc == 0 && ft_strchr(lst->str, '.')
+			&& (unsigned int)lst->elt == 0 && !ft_strchr(lst->str, '#'))
+	{
+		ft_bzero(*str, ft_strlen(*str));
+	}
+}
+
+int			conv_o(t_lst *lst, int wth, int prc)
 {
 	char				*str;
 	int					len;
@@ -37,13 +49,14 @@ int			conv_o(t_lst *lst, int width, int precision)
 
 	len = 0;
 	nb = (unsigned int)lst->elt;
-	w = (width < 0 ? -width : width);
-	str = (w + precision != 0 ? ft_strnew(w + precision) : ft_strnew(13));
+	w = (wth < 0 ? -wth : wth);
+	str = (w + prc != 0 ? ft_strnew(w + prc) : ft_strnew(13));
 	ft_prntnum(nb, 8, ' ', str);
-	precision = (precision <  (int)ft_strlen(str) ? 0 : precision);
-	add_char(lst, &str, width, precision);
+	prc = (prc <  (int)ft_strlen(str) ? 0 : prc);
+	add_char(lst, &str, wth, prc);
 	if (ft_strchr(lst->str, '#') && nb > 0)
-		add_o(&str, width);
+		add_o(&str, wth);
+	more_o(lst, &str, prc, wth);
 	if (lst->type == LHEX)
 		ft_putstr(str);
 	else

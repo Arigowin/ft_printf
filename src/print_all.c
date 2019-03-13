@@ -4,7 +4,7 @@
 
 int			get_width(char **str)
 {
-	int		width;
+	int		wth;
 	int		sign;
 	int		i;
 	int		j;
@@ -27,25 +27,25 @@ int			get_width(char **str)
 	}
 	else
 		j = i;
-	width = ft_atoi(*str + j);
-	if (width < 0)
-		width = -width;
-	return (width == 0 ? width : width * sign);
+	wth = ft_atoi(*str + j);
+	if (wth < 0)
+		wth = -wth;
+	return (wth == 0 ? wth : wth * sign);
 }
 
 int			get_precision(char **str)
 {
-	int		precision;
+	int		prc;
 	char	*tmp;
 
 	tmp = ft_strchr(*str, '.');
 	if  (tmp == NULL)
 		return (0);
-	precision = ft_atoi(tmp + 1);
-	return (precision);
+	prc = ft_atoi(tmp + 1);
+	return (prc);
 }
 
-void		remove_width_and_precision(char **str)
+void		remove_wth_and_prc(char **str)
 {
 	int		i;
 	int		j;
@@ -79,24 +79,24 @@ int			print_all(t_lst *lst)
 	t_lst		*tmp;
 	int			len;
 	int			tmp_len;
-	int			width;
-	int			precision;
+	int			wth;
+	int			prc;
 
 	tmp = lst;
 	len = 0;
-	width = 0;
-	precision = 0;
+	wth = 0;
+	prc = 0;
 	while (tmp)
 	{
 		if (tmp->type != DFLT)
 		{
-			width = get_width(&(tmp->str));
-			precision = get_precision(&(tmp->str));
-			if (width != 0 || precision != 0)
-				remove_width_and_precision(&(tmp->str));
+			wth = get_width(&(tmp->str));
+			prc = get_precision(&(tmp->str));
+			/* if (wth != 0 || prc != 0) */
+			/*     remove_wth_and_prc(&(tmp->str)); */
 		}
-		// execution de la conversion avec prise en compte de width, precision et flags
-		if ((tmp_len = conversion_manager(tmp, width, precision)) < 0)
+		// execution de la conversion avec prise en compte de wth, prc et flags
+		if ((tmp_len = conversion_manager(tmp, wth, prc)) < 0)
 			return (tmp_len);
 		len += tmp_len;
 		tmp = tmp->next;

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-int			reduce(char **buff, t_lst *lst, int dir, int width, int precision)
+int			reduce(char **buff, t_lst *lst, int dir, int wth, int prc)
 {
 	char		*str;
 	int			i;
@@ -10,9 +10,9 @@ int			reduce(char **buff, t_lst *lst, int dir, int width, int precision)
 	i = 0;
 	j = 0;
 	str = (char *)lst->elt;
-	if (dir == 0 && width > 0 && width > precision)
-		j = width - precision;
-	while (i < precision && i < (int)ft_strlen(str))
+	if (dir == 0 && wth > 0 && wth > prc)
+		j = wth - prc;
+	while (i < prc && i < (int)ft_strlen(str))
 	{
 		(*buff)[j] = str[i];
 		i++;
@@ -21,7 +21,7 @@ int			reduce(char **buff, t_lst *lst, int dir, int width, int precision)
 	return (ft_strlen(*buff));
 }
 
-int			ft_cat(char **buff, t_lst *lst, int dir, int width)
+int			ft_cat(char **buff, t_lst *lst, int dir, int wth)
 {
 	char		*str;
 	int			i;
@@ -30,8 +30,8 @@ int			ft_cat(char **buff, t_lst *lst, int dir, int width)
 	str = (char *)lst->elt;
 	i = 0;
 	j = 0;
-	if (dir == 0 && width > (int)ft_strlen(str))
-		j = width - ft_strlen(str);
+	if (dir == 0 && wth > (int)ft_strlen(str))
+		j = wth - ft_strlen(str);
 	while (i < (int)ft_strlen(str))
 	{
 		(*buff)[j] = str[i];
@@ -41,31 +41,33 @@ int			ft_cat(char **buff, t_lst *lst, int dir, int width)
 	return (ft_strlen(*buff));
 }
 
-int			conv_s(t_lst *lst, int width, int precision)
+int			conv_s(t_lst *lst, int wth, int prc)
 {
 	char		*buff;
 	int			dir;
 	int			len;
 
 	dir = 0;
-	if (width < 0)
+	if (wth < 0)
 	{
 		dir++;
-		width = -width;
+		wth = -wth;
 	}
-	if (NULL == (buff = ft_strnew((1 + width + ft_strlen(lst->elt)) * sizeof(char))))
+	if (NULL == (buff = ft_strnew((1 + wth + ft_strlen(lst->elt)) * sizeof(char))))
 		return (-1);
-	ft_add_n_char(&buff, ' ', width);
-	if (precision > 0 && ft_strlen(lst->elt) > 0)
-		reduce(&buff, lst, dir, width, precision);
-	else
-		ft_cat(&buff, lst, dir, width);
-	len = ft_strlen(buff);
-	if (lst->elt == NULL)
+	if (lst->elt == NULL && (prc >= 6 || prc == 0))
 	{
-		ft_putstr("(null)");
-		return (6);
+		ft_bzero(buff, ft_strlen(buff));
+		lst->elt = "(null)";
 	}
+	ft_add_n_char(&buff, ' ', wth);
+	if (prc > 0 && ft_strlen(lst->elt) > 0)
+		reduce(&buff, lst, dir, wth, prc);
+	else
+		ft_cat(&buff, lst, dir, wth);
+	if (prc == 0 && ft_strchr(lst->str, '.'))
+		ft_bzero(buff, ft_strlen(buff));
+	len = ft_strlen(buff);
 	ft_putstr(buff);
 	free(buff);
 	return (len);
