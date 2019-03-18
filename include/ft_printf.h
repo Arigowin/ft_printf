@@ -39,6 +39,7 @@ int					conv_p(t_lst *lst, va_list ap, int wth, int prc);
 int					conv_o(t_lst *lst, va_list ap, int wth, int prc);
 int					conv_u(t_lst *lst, va_list ap, int wth, int prc);
 int					conv_x(t_lst *lst, va_list ap, int wth, int prc);
+int					conv_f(t_lst *lst, va_list ap, int wth, int prc);
 
 void				add_char(t_lst *lst, char **str, int wth, int prc);
 

@@ -56,6 +56,7 @@ SRC =	ft_strlen.c \
 		conv_o.c \
 		conv_u.c \
 		conv_x.c \
+		conv_f.c \
 		conversion_manager.c \
 		print_all.c \
 		ft_printf.c

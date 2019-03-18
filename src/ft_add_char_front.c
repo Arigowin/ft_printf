@@ -21,6 +21,5 @@ void		ft_add_char_front(char c, char **str, int nb, int len)
 	i = 0;
 	while (i < (nb - len))
 		(*str)[i++] = c;
-	free(cpy);
 }
 

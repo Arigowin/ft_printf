@@ -41,12 +41,12 @@ int			conv_pct(t_lst *lst, va_list ap, int wth, int prc)
 int			conversion_manager(t_lst *lst, va_list ap, int wth, int prc)
 {
 	int		(*fct[11])(t_lst *, va_list, int, int) = {no_conv, conv_s, conv_d,
-		conv_c, conv_p, conv_o, conv_u, conv_x, conv_x, NULL, conv_pct};
+		conv_c, conv_p, conv_o, conv_u, conv_x, conv_x, conv_f, conv_pct};
 	int		len;
 
 	len = 0;
 	// SEGFAULT FOR NOW REMOVE THIS AFTER ADD OTHER FLAGS
-	if (lst->type > 10 || lst->type == FLT)
+	if (lst->type > 10)
 		return (-1);
 	len = fct[lst->type](lst, ap, wth, prc);
 	return (len);
