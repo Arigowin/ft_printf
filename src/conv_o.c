@@ -28,19 +28,19 @@ void		add_o(char **str, int wth)
 	}
 }
 
-void		more_o(t_lst *lst, char **str, int prc, int wth)
+void		more_o(t_lst *lst, char **str, unsigned int nb, int prc, int wth)
 {
 	if (prc == 0 && ft_strchr(lst->str, '.')
-			&& (unsigned int)lst->elt == 0 && wth != 0)
+			&& nb == 0 && wth != 0)
 		ft_memset(*str, ' ', ft_strlen(*str));
 	else if (prc == 0 && ft_strchr(lst->str, '.')
-			&& (unsigned int)lst->elt == 0 && !ft_strchr(lst->str, '#'))
+			&& nb == 0 && !ft_strchr(lst->str, '#'))
 	{
 		ft_bzero(*str, ft_strlen(*str));
 	}
 }
 
-int			conv_o(t_lst *lst, int wth, int prc)
+int			conv_o(t_lst *lst, va_list ap, int wth, int prc)
 {
 	char				*str;
 	int					len;
@@ -48,7 +48,7 @@ int			conv_o(t_lst *lst, int wth, int prc)
 	int					w;
 
 	len = 0;
-	nb = (unsigned int)lst->elt;
+	nb = va_arg(ap, unsigned int);
 	w = (wth < 0 ? -wth : wth);
 	str = (w + prc != 0 ? ft_strnew(w + prc) : ft_strnew(13));
 	ft_prntnum(nb, 8, ' ', str);
@@ -56,7 +56,7 @@ int			conv_o(t_lst *lst, int wth, int prc)
 	add_char(lst, &str, wth, prc);
 	if (ft_strchr(lst->str, '#') && nb > 0)
 		add_o(&str, wth);
-	more_o(lst, &str, prc, wth);
+	more_o(lst, &str, nb, prc, wth);
 	if (lst->type == LHEX)
 		ft_putstr(str);
 	else

@@ -21,12 +21,14 @@ t_type		check_type(char c)
 		return (LHEX);
 	if (c == 'X')
 		return (UHEX);
+	if (c == 'f')
+		return (FLT);
 	if (c == '%')
 		return (PCT);
 	return (DFLT);
 }
 
-void		parse(t_lst **lst, va_list ap, const char *format)
+void		parse(t_lst **lst, const char *format)
 {
 	size_t	i;
 	size_t	start;
@@ -39,24 +41,16 @@ void		parse(t_lst **lst, va_list ap, const char *format)
 		{
 			if (i != start)
 			{
-				lst_add(lst, NULL, DFLT, ft_strsub(format, start, i - start));
+				lst_add(lst, DFLT, ft_strsub(format, start, i - start));
 				start = i;
 			}
-			while (format[i])
+			while (format[i] && i < ft_strlen(format))
 			{
 				i++;
-				if (ft_strchr("cspdiouxX%", format[i]) != NULL)
+				if (ft_strchr("cspdiouxXf%", format[i]) != NULL && i < ft_strlen(format))
 				{
-					lst_add(lst, va_arg(ap, void *),
+					lst_add(lst,
 							check_type(format[i]),
-							ft_strsub(format, start + 1, (i - start)));
-					start = i + 1;
-					break ;
-				}
-				if (ft_strchr("f", format[i]) != NULL)
-				{
-					lst_add_flt(lst, (double)va_arg(ap, double),
-							FLT,
 							ft_strsub(format, start + 1, (i - start)));
 					start = i + 1;
 					break ;
@@ -66,5 +60,5 @@ void		parse(t_lst **lst, va_list ap, const char *format)
 		i++;
 	}
 	if (i != start)
-		lst_add(lst, NULL, DFLT, ft_strsub(format, start, i - start));
+		lst_add(lst, DFLT, ft_strsub(format, start, i - start));
 }

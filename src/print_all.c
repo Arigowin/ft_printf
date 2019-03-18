@@ -74,7 +74,7 @@ void		remove_wth_and_prc(char **str)
 	*str = new;
 }
 
-int			print_all(t_lst *lst)
+int			print_all(t_lst *lst, va_list ap)
 {
 	t_lst		*tmp;
 	int			len;
@@ -96,7 +96,7 @@ int			print_all(t_lst *lst)
 			/*     remove_wth_and_prc(&(tmp->str)); */
 		}
 		// execution de la conversion avec prise en compte de wth, prc et flags
-		if ((tmp_len = conversion_manager(tmp, wth, prc)) < 0)
+		if ((tmp_len = conversion_manager(tmp, ap, wth, prc)) < 0)
 			return (tmp_len);
 		len += tmp_len;
 		tmp = tmp->next;

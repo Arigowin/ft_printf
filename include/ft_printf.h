@@ -21,7 +21,6 @@ typedef enum		e_type
 
 typedef struct		s_lst
 {
-	void			*elt;
 	double			flt;
 	t_type			type;
 	char			*str;
@@ -30,23 +29,23 @@ typedef struct		s_lst
 
 int					ft_printf(const char *format, ...);
 
-void				parse(t_lst **lst, va_list ap, const char *format);
-int					print_all(t_lst *lst);
-int					conversion_manager(t_lst *lst, int wth, int prc);
-int					conv_s(t_lst *lst, int wth, int prc);
-int					conv_d(t_lst *lst, int wth, int prc);
-int					conv_c(t_lst *lst, int wth, int prc);
-int					conv_p(t_lst *lst, int wth, int prc);
-int					conv_o(t_lst *lst, int wth, int prc);
-int					conv_u(t_lst *lst, int wth, int prc);
-int					conv_x(t_lst *lst, int wth, int prc);
+void				parse(t_lst **lst, const char *format);
+int					print_all(t_lst *lst, va_list ap);
+int					conversion_manager(t_lst *lst, va_list ap, int wth, int prc);
+int					conv_s(t_lst *lst, va_list ap, int wth, int prc);
+int					conv_d(t_lst *lst, va_list ap, int wth, int prc);
+int					conv_c(t_lst *lst, va_list ap, int wth, int prc);
+int					conv_p(t_lst *lst, va_list ap, int wth, int prc);
+int					conv_o(t_lst *lst, va_list ap, int wth, int prc);
+int					conv_u(t_lst *lst, va_list ap, int wth, int prc);
+int					conv_x(t_lst *lst, va_list ap, int wth, int prc);
 
 void				add_char(t_lst *lst, char **str, int wth, int prc);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putendl(const char *s);
-void				ft_putnbr(int n);
+void				ft_putnbr(long long int n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(const char *s, int fd);
@@ -54,12 +53,11 @@ void				ft_putnbr_fd(int n, int fd);
 void				ft_putnbrendl(int n);
 void				ft_putupper(char const *s);
 
-t_lst				*lst_add(t_lst **lst, void *elt, t_type type, char *str);
-t_lst				*lst_add_flt(t_lst **lst, double e, t_type t, char *str);
+t_lst				*lst_add(t_lst **lst, t_type type, char *str);
 void				lst_free(t_lst **lst);
 
 size_t				ft_strlen(const char *s);
-char				*ft_itoa(int n);
+char				*ft_itoa(long long int n);
 char				*ft_itoa_base(int n, int base);
 int					ft_atoi(const char *str);
 char				*ft_strnew(size_t size);

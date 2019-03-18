@@ -53,23 +53,44 @@ void		add_symbole(t_lst *lst, char **str, int wth, int syb[2])
 		*str = add_syb(' ', *str);
 }
 
-void		more_d(t_lst *lst, char **str, int prc, int wth)
+void		more_d(t_lst *lst, char **str, int nb, int prc, int wth)
 {
 	if (prc == 0 && ft_strchr(lst->str, '.')
-			&& (int)lst->elt == 0 && wth != 0)
+			&& nb == 0 && wth != 0)
 		ft_memset(*str, ' ', ft_strlen(*str));
 	else if (prc == 0 && ft_strchr(lst->str, '.')
-			&& (int)lst->elt == 0)
+			&& nb == 0)
 		ft_bzero(*str, ft_strlen(*str));
 }
 
-int			conv_d(t_lst *lst, int wth, int prc)
+long long int	get_va_arg_d(t_lst *lst, va_list ap)
+{
+	char			*buff;
+
+	if ((buff = ft_strchr(lst->str, 'h')) != NULL)
+	{
+		if (*(buff + 1) == 'h')
+			return ((char)va_arg(ap, int));
+		return ((short int)va_arg(ap, int));
+	}
+	if ((buff = ft_strchr(lst->str, 'l')) != NULL)
+	{
+		if (*(buff + 1) == 'l')
+			return (va_arg(ap, long long int));
+		return (va_arg(ap, long int));
+	}
+	return (va_arg(ap, int));
+}
+
+int			conv_d(t_lst *lst, va_list ap, int wth, int prc)
 {
 	char	*str;
+	long long int nb;
 	int		len;
 	int		syb[2];
 
-	str = alloc_buff(ft_itoa((int)lst->elt), wth, prc);
+	nb = get_va_arg_d(lst, ap);
+	str = alloc_buff(ft_itoa(nb), wth, prc);
 	if (wth > 0 && lst->str[0] == '-')
 		wth = -wth;
 	syb[0] = ft_remove_char('-', &str);
@@ -82,7 +103,7 @@ int			conv_d(t_lst *lst, int wth, int prc)
 		wth = wth + (syb[1] ? syb[1] : syb[0]);
 	add_char(lst, &str, wth, prc);
 	add_symbole(lst, &str, wth, syb);
-	more_d(lst, &str, prc, wth);
+	more_d(lst, &str, nb, prc, wth);
 	ft_putstr(str);
 	len = ft_strlen(str);
 	free(str);

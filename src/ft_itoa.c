@@ -1,6 +1,7 @@
 #include "ft_printf.h"
 
-static int		ft_puttbl(unsigned int n, int len, int sign, char **str)
+static int		ft_puttbl(unsigned long long int n, int len,
+		int sign, char **str)
 {
 	int	i;
 
@@ -16,7 +17,7 @@ static int		ft_puttbl(unsigned int n, int len, int sign, char **str)
 	return (i + 1);
 }
 
-char			*ft_itoa(int n)
+char			*ft_itoa(long long int n)
 {
 	char	*str;
 

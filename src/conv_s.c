@@ -1,49 +1,46 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-int			reduce(char **buff, t_lst *lst, int dir, int wth, int prc)
+int			reduce(char **str, char *s2, int dir, int wth, int prc)
 {
-	char		*str;
 	int			i;
 	int			j;
 
 	i = 0;
 	j = 0;
-	str = (char *)lst->elt;
 	if (dir == 0 && wth > 0 && wth > prc)
 		j = wth - prc;
-	while (i < prc && i < (int)ft_strlen(str))
+	while (i < prc && i < (int)ft_strlen(s2))
 	{
-		(*buff)[j] = str[i];
+		(*str)[j] = s2[i];
 		i++;
 		j++;
 	}
-	return (ft_strlen(*buff));
+	return (ft_strlen(*str));
 }
 
-int			ft_cat(char **buff, t_lst *lst, int dir, int wth)
+int			ft_cat(char **str, char *s2, int dir, int wth)
 {
-	char		*str;
 	int			i;
 	int			j;
 
-	str = (char *)lst->elt;
 	i = 0;
 	j = 0;
-	if (dir == 0 && wth > (int)ft_strlen(str))
-		j = wth - ft_strlen(str);
-	while (i < (int)ft_strlen(str))
+	if (dir == 0 && wth > (int)ft_strlen(s2))
+		j = wth - ft_strlen(s2);
+	while (i < (int)ft_strlen(s2))
 	{
-		(*buff)[j] = str[i];
+		(*str)[j] = s2[i];
 		i++;
 		j++;
 	}
-	return (ft_strlen(*buff));
+	return (ft_strlen(*str));
 }
 
-int			conv_s(t_lst *lst, int wth, int prc)
+int			conv_s(t_lst *lst, va_list ap, int wth, int prc)
 {
 	char		*buff;
+	char		*str;
 	int			dir;
 	int			len;
 
@@ -53,23 +50,24 @@ int			conv_s(t_lst *lst, int wth, int prc)
 		dir++;
 		wth = -wth;
 	}
-	if (NULL == (buff = ft_strnew((1 + wth + ft_strlen(lst->elt)) * sizeof(char))))
+	buff = va_arg(ap, char *);
+	if (NULL == (str = ft_strnew((1 + wth + ft_strlen(buff)) * sizeof(char))))
 		return (-1);
-	if (lst->elt == NULL && (prc >= 6 || prc == 0))
+	if (buff == NULL && (prc >= 6 || prc == 0))
 	{
-		ft_bzero(buff, ft_strlen(buff));
-		lst->elt = "(null)";
+		ft_bzero(str, ft_strlen(str));
+		buff = "(null)";
 	}
-	ft_add_n_char(&buff, ' ', wth);
-	if (prc > 0 && ft_strlen(lst->elt) > 0)
-		reduce(&buff, lst, dir, wth, prc);
+	ft_add_n_char(&str, ' ', wth);
+	if (prc > 0 && ft_strlen(buff) > 0)
+		reduce(&str, buff, dir, wth, prc);
 	else
-		ft_cat(&buff, lst, dir, wth);
+		ft_cat(&str, buff, dir, wth);
 	if (prc == 0 && ft_strchr(lst->str, '.'))
-		ft_bzero(buff, ft_strlen(buff));
-	len = ft_strlen(buff);
-	ft_putstr(buff);
-	free(buff);
+		ft_bzero(str, ft_strlen(str));
+	len = ft_strlen(str);
+	ft_putstr(str);
+	free(str);
 	return (len);
 }
 

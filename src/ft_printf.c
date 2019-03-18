@@ -19,8 +19,8 @@ int			ft_printf(const char *format, ...)
 		return (-1);
 	}
 	va_start(ap, format);
-	parse(&lst, ap, format);
-	len = print_all(lst);
+	parse(&lst, format);
+	len = print_all(lst, ap);
 	va_end(ap);
 	return (len);
 }

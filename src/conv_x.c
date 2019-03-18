@@ -39,7 +39,26 @@ void		more_x(t_lst *lst, char **str, unsigned long long int nb, int prc, int wth
 		ft_bzero(*str, ft_strlen(*str));
 }
 
-int			conv_x(t_lst *lst, int wth, int prc)
+long long int	get_va_arg_x(t_lst *lst, va_list ap)
+{
+	char			*buff;
+
+	if ((buff = ft_strchr(lst->str, 'h')) != NULL)
+	{
+		if (*(buff + 1) == 'h')
+			return ((char)va_arg(ap, int));
+		return ((short int)va_arg(ap, int));
+	}
+	if ((buff = ft_strchr(lst->str, 'l')) != NULL)
+	{
+		if (*(buff + 1) == 'l')
+			return (va_arg(ap, long long int));
+		return (va_arg(ap, long int));
+	}
+	return (va_arg(ap, unsigned int));
+}
+
+int			conv_x(t_lst *lst, va_list ap, int wth, int prc)
 {
 	char				*str;
 	int					len;
@@ -47,7 +66,7 @@ int			conv_x(t_lst *lst, int wth, int prc)
 	int					w;
 
 	len = 0;
-	nb = (unsigned int)lst->elt;
+	nb = get_va_arg_x(lst, ap);
 	w = (wth < 0 ? -wth : wth);
 	str = (w + prc != 0 ? ft_strnew(w + prc) : ft_strnew(20));
 	ft_prntnum(nb, 16, ' ', str);
