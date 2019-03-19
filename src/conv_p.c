@@ -23,7 +23,7 @@ int			conv_p(t_lst *lst, va_list ap, int wth, int prc)
 	if ((lst->str)[0] == '0' || (!ft_isdigit((lst->str)[0])
 				&& (lst->str)[1] == '0'))
 		(lst->str)[((lst->str)[0] == '0' ? 0 : 1)] = ' ';
-	add_char(lst, &str, wth, 0);
+	ft_add_char(lst, &str, wth, 0);
 	if (ptr != NULL)
 		ft_putstr("0x");
 	ft_putstr(str + i);

@@ -16,7 +16,7 @@ int			get_width(char **str)
 	while (i < (int)ft_strlen(*str) && (!ft_isdigit((*str)[i])
 				|| (*str)[i] == '0') && (*str)[i] != '.')
 		i++;
-	if ((*str)[i - 1] == '-' || (*str)[i - 1] == '+' || (*str)[i - 1] == '0')
+	if (i > 0 && ((*str)[i - 1] == '-' || (*str)[i - 1] == '+' || (*str)[i - 1] == '0'))
 	{
 		if ((j = i - 1) < 0)
 			j = 0;

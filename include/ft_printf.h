@@ -41,7 +41,8 @@ int					conv_u(t_lst *lst, va_list ap, int wth, int prc);
 int					conv_x(t_lst *lst, va_list ap, int wth, int prc);
 int					conv_f(t_lst *lst, va_list ap, int wth, int prc);
 
-void				add_char(t_lst *lst, char **str, int wth, int prc);
+void				ft_add_char(t_lst *lst, char **str, int wth, int prc);
+void				ft_add_symbole(t_lst *lst, char **str, int wth, int syb[2]);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
@@ -58,6 +59,7 @@ t_lst				*lst_add(t_lst **lst, t_type type, char *str);
 void				lst_free(t_lst **lst);
 
 size_t				ft_strlen(const char *s);
+size_t				ft_nbrlen(int nb);
 char				*ft_itoa(long long int n);
 char				*ft_itoa_base(int n, int base);
 int					ft_atoi(const char *str);

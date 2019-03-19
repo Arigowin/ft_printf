@@ -72,7 +72,7 @@ int			conv_x(t_lst *lst, va_list ap, int wth, int prc)
 	ft_prntnum(nb, 16, ' ', str);
 	prc = (prc <  (int)ft_strlen(str) ? 0 : prc);
 	if (!ft_strchr(lst->str, '#') || (int)ft_strlen(str) + 2 <= w)
-		add_char(lst, &str, wth, prc);
+		ft_add_char(lst, &str, wth, prc);
 	if (ft_strchr(lst->str, '#') && nb > 0)
 		add_x(&str, wth);
 	more_x(lst, &str, nb, prc, wth);

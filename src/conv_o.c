@@ -53,7 +53,7 @@ int			conv_o(t_lst *lst, va_list ap, int wth, int prc)
 	str = (w + prc != 0 ? ft_strnew(w + prc) : ft_strnew(13));
 	ft_prntnum(nb, 8, ' ', str);
 	prc = (prc <  (int)ft_strlen(str) ? 0 : prc);
-	add_char(lst, &str, wth, prc);
+	ft_add_char(lst, &str, wth, prc);
 	if (ft_strchr(lst->str, '#') && nb > 0)
 		add_o(&str, wth);
 	more_o(lst, &str, nb, prc, wth);

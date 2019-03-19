@@ -32,7 +32,7 @@ int			conv_u(t_lst *lst, va_list ap, int wth, int prc)
 	nb = get_va_arg_u(lst, ap);
 	ft_prntnum(nb, 10, ' ', str);
 	prc = (prc <  (int)ft_strlen(str) ? 0 : prc);
-	add_char(lst, &str, wth, prc);
+	ft_add_char(lst, &str, wth, prc);
 	ft_putstr(str);
 	len = ft_strlen(str);
 	free(str);
