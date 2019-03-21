@@ -18,6 +18,7 @@ SRC =	ft_strlen.c \
 		ft_nbrlen.c \
 		ft_strchr.c \
 		ft_strsub.c \
+		ft_strdup.c \
 		ft_strdel.c \
 		ft_bzero.c \
 		ft_memalloc.c \

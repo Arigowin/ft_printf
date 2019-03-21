@@ -1,40 +1,36 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-int			reduce(char **str, char *s2, int dir, int wth, int prc)
+void		reduce(char **str, char *s2, int dir, int wth, int prc)
 {
-	int			i;
 	int			j;
+	int			len;
 
-	i = 0;
 	j = 0;
-	if (dir == 0 && wth > 0 && wth > prc)
+	len = ft_strlen(s2);
+	if (dir == 0 && wth > 0 && wth > len && wth - len > wth - prc)
+		j = wth - len;
+	else if (dir == 0 && wth > 0 && wth > prc)
 		j = wth - prc;
-	while (i < prc && i < (int)ft_strlen(s2))
-	{
-		(*str)[j] = s2[i];
-		i++;
-		j++;
-	}
-	return (ft_strlen(*str));
+	ft_memcpy((*str) + j, s2, prc);
 }
 
-int			ft_cat(char **str, char *s2, int dir, int wth)
+void		ft_cat(char **str, char *s2, int dir, int wth)
 {
-	int			i;
 	int			j;
+	int			len;
 
-	i = 0;
 	j = 0;
-	if (dir == 0 && wth > (int)ft_strlen(s2))
-		j = wth - ft_strlen(s2);
-	while (i < (int)ft_strlen(s2))
+	len = ft_strlen(s2);
+	if (wth < len)
 	{
-		(*str)[j] = s2[i];
-		i++;
-		j++;
+		ft_strdel(str);
+		*str = ft_strdup(s2);
+		return ;
 	}
-	return (ft_strlen(*str));
+	if (dir == 0 && wth > len)
+		j = wth - len;
+	ft_memcpy((*str) + j, s2, len);
 }
 
 int			conv_s(t_lst *lst, va_list ap, int wth, int prc)
@@ -51,15 +47,15 @@ int			conv_s(t_lst *lst, va_list ap, int wth, int prc)
 		wth = -wth;
 	}
 	buff = va_arg(ap, char *);
-	if (NULL == (str = ft_strnew((1 + wth + ft_strlen(buff)) * sizeof(char))))
+	if (NULL == (str = ft_strnew(1 + wth + ft_strlen(buff))))
 		return (-1);
 	if (buff == NULL && (prc >= 6 || prc == 0))
 	{
-		ft_bzero(str, ft_strlen(str));
+		ft_bzero(str, ft_strlen(str) + 1);
 		buff = "(null)";
 	}
 	ft_add_n_char(&str, ' ', wth);
-	if (prc > 0 && ft_strlen(buff) > 0)
+	if (prc > 0 && ft_strlen(buff) > 0 && prc < (int)ft_strlen(buff))
 		reduce(&str, buff, dir, wth, prc);
 	else
 		ft_cat(&str, buff, dir, wth);
@@ -67,7 +63,7 @@ int			conv_s(t_lst *lst, va_list ap, int wth, int prc)
 		ft_bzero(str, ft_strlen(str));
 	len = ft_strlen(str);
 	ft_putstr(str);
-	free(str);
+	ft_strdel(&str);
 	return (len);
 }
 

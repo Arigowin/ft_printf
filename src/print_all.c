@@ -70,7 +70,7 @@ void		remove_wth_and_prc(char **str)
 		i++;
 		j++;
 	}
-	free(*str);
+	ft_strdel(str);
 	*str = new;
 }
 

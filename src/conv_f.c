@@ -31,7 +31,7 @@ int			reduce_deci(signed long int deci, int prc)
 	deci = ft_atoi(buff);
 	if (nb >= '5')
 		deci++;
-	free(buff);
+	ft_strdel(&buff);
 	return (deci);
 }
 
@@ -114,7 +114,7 @@ int			conv_f(t_lst *lst, va_list ap, int wth, int prc)
 	else
 		raise_deci(&str, flt[1], prc);
 	ft_add_char(lst, &str, wth, 0);
-	ft_add_symbole(lst, &str, wth, syb);
+	ft_add_symbole(lst, &str, wth, prc, syb);
 	len = ft_strlen(str);
 	ft_putstr(str);
 	ft_strdel(&str);

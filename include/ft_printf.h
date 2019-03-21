@@ -42,7 +42,7 @@ int					conv_x(t_lst *lst, va_list ap, int wth, int prc);
 int					conv_f(t_lst *lst, va_list ap, int wth, int prc);
 
 void				ft_add_char(t_lst *lst, char **str, int wth, int prc);
-void				ft_add_symbole(t_lst *lst, char **str, int wth, int syb[2]);
+void				ft_add_symbole(t_lst *lst, char **str, int wth, int prc, int syb[2]);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
@@ -71,6 +71,7 @@ void				*ft_memset(void *b, int c, size_t len);
 void				ft_ptr_to_hex(const void *ptr, char (*res)[15]);
 void				ft_strdel(char **as);
 char				*ft_strsub(char const *s, size_t start, size_t len);
+char				*ft_strdup(const char *s1);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strcat(char *s1, const char *s2);
 int					ft_isdigit(int c);

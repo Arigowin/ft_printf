@@ -19,7 +19,7 @@ void		add_x(char **str, int wth)
 			buff[j++] = (*str)[i++];
 		buff[0] = '0';
 		buff[1] = 'x';
-		free(*str);
+		ft_strdel(str);
 		*str = buff;
 		return ;
 	}
@@ -81,7 +81,7 @@ int			conv_x(t_lst *lst, va_list ap, int wth, int prc)
 	else
 		ft_putupper(str);
 	len = ft_strlen(str);
-	free(str);
+	ft_strdel(&str);
 	return (len);
 }
 

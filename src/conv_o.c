@@ -17,7 +17,7 @@ void		add_o(char **str, int wth)
 		while (j < len)
 			buff[j++] = (*str)[i++];
 		buff[0] = '0';
-		free(*str);
+		ft_strdel(str);
 		*str = buff;
 	}
 	else
@@ -62,6 +62,6 @@ int			conv_o(t_lst *lst, va_list ap, int wth, int prc)
 	else
 		ft_putupper(str);
 	len = ft_strlen(str);
-	free(str);
+	ft_strdel(&str);
 	return (len);
 }

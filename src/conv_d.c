@@ -62,13 +62,14 @@ int			conv_d(t_lst *lst, va_list ap, int wth, int prc)
 		wth = -wth;
 	syb[0] = ft_remove_char('-', &str);
 	syb[1] = (ft_strchr(lst->str, '+') ? 1 : ft_remove_char('+', &str));
-	prc = (prc < (int)ft_strlen(str) ? 0 : prc);
+	if (prc != 0)
+		prc = (prc < (int)ft_strlen(str) ? -1 : prc);
 	if (wth > 0)
 		wth = wth - (syb[1] ? syb[1] : syb[0]);
 	else
 		wth = wth + (syb[1] ? syb[1] : syb[0]);
 	ft_add_char(lst, &str, wth, prc);
-	ft_add_symbole(lst, &str, wth, syb);
+	ft_add_symbole(lst, &str, wth, prc, syb);
 	more_d(lst, &str, nb, prc, wth);
 	ft_putstr(str);
 	len = ft_strlen(str);

@@ -35,6 +35,6 @@ int			conv_u(t_lst *lst, va_list ap, int wth, int prc)
 	ft_add_char(lst, &str, wth, prc);
 	ft_putstr(str);
 	len = ft_strlen(str);
-	free(str);
+	ft_strdel(&str);
 	return (len);
 }
