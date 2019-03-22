@@ -33,27 +33,34 @@ int			search_o(char *str, char *nb)
 void		add_o(char **str, char *nb, int wth)
 {
 	char	*buff;
-	int		i;
-	int		j;
 	int		len;
+	int		i;
 
 	i = 0;
-	if (wth <= 0 || ft_strlen(*str) == ft_strlen(nb))
+	len = ft_strlen(nb);
+	if (wth <= 0 || ((wth < 0 && len >= -wth) || len >= wth))
 	{
-		len = (wth >= 0 ? ft_strlen(*str) + 1 : ft_strlen(*str));
-		buff = ft_strnew(len + 1);
-		j = 1;
-		while (i < len)
-			buff[j++] = (*str)[i++];
-		buff[0] = '0';
-		ft_strdel(str);
-		*str = buff;
+		if ((*str)[ft_strlen(*str) - 1] == ' ')
+		{
+			(*str)[0] = '0';
+			i = -1;
+			while (nb[++i])
+				(*str)[i + 1] = nb[i];
+		}
+		else
+		{
+			buff = ft_strnew(ft_strlen(*str) + 1);
+			buff[0] = '0';
+			ft_memcpy(buff + 1, *str, ft_strlen(*str));
+			ft_strdel(str);
+			*str = buff;
+		}
 	}
 	else
 	{
-		while (!ft_isdigit((*str)[i]))
+		while ((*str)[i] && !ft_isdigit((*str)[i]))
 			i++;
-		(*str)[(i < 0 ? 0 : i - 1)] = '0';
+		(*str)[(i <= 0 ? 0 : i - 1)] = '0';
 	}
 }
 
@@ -89,10 +96,7 @@ int			conv_o(t_lst *lst, va_list ap, int wth, int prc)
 		add_o(&str, buff, wth);
 	ft_strdel(&buff);
 	more_o(lst, &str, nb, prc, wth);
-	if (lst->type == LHEX)
-		ft_putstr(str);
-	else
-		ft_putupper(str);
+	ft_putstr(str);
 	len = ft_strlen(str);
 	ft_strdel(&str);
 	return (len);
