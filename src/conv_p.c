@@ -17,7 +17,7 @@ void		add_0x(void *ptr, char **str)
 	i -= 2;
 	while ((*str)[i])
 		(*str)[j++] = (*str)[i++];
-	ft_memset(*str + j, '\0', i);
+	ft_memset(*str + j, '\0', (i - j) + 1);
 }
 
 int			conv_p(t_lst *lst, va_list ap, int wth, int prc)
@@ -33,7 +33,7 @@ int			conv_p(t_lst *lst, va_list ap, int wth, int prc)
 	str = ft_strnew(16 + w);
 	ptr = va_arg(ap, void *);
 	if (ptr == NULL)
-		ft_memcpy(buff, "(nil)", 5);
+		ft_memcpy(buff, "(nil)", 16);
 	else
 		ft_ptr_to_hex(ptr, &buff);
 	ft_memcpy(str, buff, 16);
