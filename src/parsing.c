@@ -42,7 +42,7 @@ t_type		check_type(char c)
 				 (c == 'x' ? LHEX :
 				  (c == 'X' ? UHEX :
 				   (c == 'f' ? FLT :
-					(c == '%' ? PCT : DFLT))))))))));
+					(c == '%' ? PCT : OTHER))))))))));
 }
 
 void		parse_1(t_lst **lst, t_type type, char *str)
@@ -72,16 +72,15 @@ void		parse_1(t_lst **lst, t_type type, char *str)
 
 void		parse_2(t_lst **lst, const char *format, size_t *start, size_t *i)
 {
-	while (format[*i] && *i < ft_strlen(format))
-	{
+	(*i)++;
+	while (*i < ft_strlen(format) && (ft_strchr("#0-+ hlL.", format[*i])
+				|| ft_isdigit(format[*i])))
 		(*i)++;
-		if (ft_strchr("cspdiouxXf%", format[*i]) != NULL && *i < ft_strlen(format))
-		{
-			parse_1(lst, check_type(format[*i]), ft_strsub(format, *start + 1, (*i - *start)));
-			*start = *i + 1;
-			break ;
-		}
-	}
+	if (*start + 1 >= ft_strlen(format))
+		*start -= 1;
+	parse_1(lst, check_type(format[*i]),
+			ft_strsub(format, *start + 1, (*i - *start)));
+	*start = *i + 1;
 }
 
 void		parse(t_lst **lst, const char *format)

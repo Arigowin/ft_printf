@@ -55,6 +55,7 @@ SRC =	ft_strlen.c \
 		ft_add_char.c \
 		ft_add_symbole.c \
 		no_conv.c \
+		other_conv.c \
 		conv_pct.c \
 		conv_s.c \
 		conv_d.c \

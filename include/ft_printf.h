@@ -9,6 +9,7 @@
 typedef enum		e_type
 {
 	DFLT,
+	OTHER,
 	STR,
 	INT,
 	CHAR,
@@ -53,6 +54,7 @@ void				parse(t_lst **lst, const char *format);
 int					print_all(t_lst *lst, va_list ap);
 int					conversion_manager(t_lst *lst, va_list ap);
 int					no_conv(t_lst *lst, va_list ap);
+int					other_conv(t_lst *lst, va_list ap);
 int					conv_pct(t_lst *lst, va_list ap);
 int					conv_s(t_lst *lst, va_list ap);
 int					conv_d(t_lst *lst, va_list ap);
