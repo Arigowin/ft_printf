@@ -3,20 +3,14 @@
 
 long long int		get_va_arg_x(t_lst *lst, va_list ap)
 {
-	char			*buff;
-
-	if ((buff = ft_strchr(lst->str, 'h')) != NULL)
-	{
-		if (*(buff + 1) == 'h')
-			return ((unsigned char)va_arg(ap, unsigned int));
+	if (lst->flg.hh)
+		return ((unsigned char)va_arg(ap, unsigned int));
+	if (lst->flg.h)
 		return ((unsigned short int)va_arg(ap, unsigned int));
-	}
-	if ((buff = ft_strchr(lst->str, 'l')) != NULL)
-	{
-		if (*(buff + 1) == 'l')
-			return (va_arg(ap, unsigned long long int));
+	if (lst->flg.ll)
+		return (va_arg(ap, unsigned long long int));
+	if (lst->flg.l)
 		return (va_arg(ap, unsigned long int));
-	}
 	return (va_arg(ap, unsigned int));
 }
 
@@ -30,7 +24,6 @@ void				more_add_x(char **str)
 	{
 		while ((*str)[i] && ft_strchr("0123456789abcdef", (*str)[i]))
 			i++;
-		i = (i - 1 > 0 ? i - 1 : i) - 1;
 		while (i-- > -1)
 			(*str)[i + 2] = (*str)[i];
 		(*str)[0] = '0';
@@ -53,9 +46,8 @@ void				add_x(t_lst *lst, char **str, char *s2)
 	int				i;
 
 	i = 0;
-	if ((((*str)[0] == ' ' && (*str)[1] == ' ') || (((lst->str)[0] == '0'
-						|| (lst->str)[1] == '0') && !ft_strchr(lst->str, '.')))
-			&& ft_strlen(s2) != ft_strlen(*str))
+	if ((((*str)[0] == ' ' && (*str)[1] == ' ') || (lst->flg.zero
+					&& !lst->flg.point)) && ft_strlen(s2) != ft_strlen(*str))
 	{
 		while ((*str)[i] && !ft_strchr("0123456789abcdef", (*str)[i]))
 			i++;
@@ -66,12 +58,11 @@ void				add_x(t_lst *lst, char **str, char *s2)
 		more_add_x(str);
 }
 
-void				more_x(t_lst *lst, char **str, unsigned long long int nb,
-		int prc, int wth)
+void				more_x(t_lst *lst, char **str, unsigned long long int nb)
 {
-	if (prc == 0 && ft_strchr(lst->str, '.') && nb == 0 && wth != 0)
+	if (!lst->flg.prc && lst->flg.point && !nb && lst->flg.wth)
 		ft_memset(*str, ' ', ft_strlen(*str));
-	else if (prc == 0 && ft_strchr(lst->str, '.') && nb == 0)
+	else if (!lst->flg.prc && lst->flg.point && !nb)
 		ft_bzero(*str, ft_strlen(*str));
 	if (lst->type == LHEX)
 		ft_putstr(*str);
@@ -79,7 +70,7 @@ void				more_x(t_lst *lst, char **str, unsigned long long int nb,
 		ft_putupper(*str);
 }
 
-int					conv_x(t_lst *lst, va_list ap, int wth, int prc)
+int					conv_x(t_lst *lst, va_list ap)
 {
 	char						*buff;
 	char						*str;
@@ -89,19 +80,21 @@ int					conv_x(t_lst *lst, va_list ap, int wth, int prc)
 
 	len = 0;
 	nb = get_va_arg_x(lst, ap);
-	w = (wth < 0 ? -wth : wth);
-	str = (w + prc != 0 && w + prc >= 20 ? ft_strnew(w + prc) : ft_strnew(20));
+	w = (lst->flg.wth < 0 ? -lst->flg.wth : lst->flg.wth);
+	str = (w + lst->flg.prc && w + lst->flg.prc >= 20 ?
+			ft_strnew(w + lst->flg.prc) : ft_strnew(20));
 	ft_prntnum(nb, 16, ' ', str);
 	buff = ft_strdup(str);
-	prc = (prc < (int)ft_strlen(str) && nb != 0 && prc != 0 ? -1 : prc);
-	if (nb > 0 && ft_strchr(lst->str, '#') && ((int)ft_strlen(buff) + 2 >= w
-				|| w - 2 <= prc))
-		wth = 0;
-	ft_add_char(lst, &str, wth, prc);
-	if (ft_strchr(lst->str, '#') && nb > 0)
+	lst->flg.prc = (lst->flg.prc < (int)ft_strlen(str) && nb
+			&& lst->flg.prc ? -1 : lst->flg.prc);
+	if (nb > 0 && lst->flg.sharp && ((int)ft_strlen(buff) + 2 >= w
+				|| w - 2 <= lst->flg.prc))
+		lst->flg.wth = 0;
+	ft_add_char(lst, &str);
+	if (lst->flg.sharp && nb > 0)
 		add_x(lst, &str, buff);
 	ft_strdel(&buff);
-	more_x(lst, &str, nb, prc, wth);
+	more_x(lst, &str, nb);
 	len = ft_strlen(str);
 	ft_strdel(&str);
 	return (len);

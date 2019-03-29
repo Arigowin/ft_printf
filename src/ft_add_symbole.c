@@ -1,6 +1,5 @@
 #include "ft_printf.h"
 
-#include <stdio.h>
 char		*add_syb(char c, char *str)
 {
 	char	*buff;
@@ -56,7 +55,7 @@ int			count_char(char *str, char c)
 	return (i);
 }
 
-void		ft_add_symbole(t_lst *lst, char **str, int wth, int prc, int syb[2])
+void		ft_add_symbole(t_lst *lst, char **str, int syb[2])
 {
 	char	*tmp;
 	int		len;
@@ -66,10 +65,13 @@ void		ft_add_symbole(t_lst *lst, char **str, int wth, int prc, int syb[2])
 		tmp = add_syb('-', *str);
 	else if (syb[1])
 		tmp = add_syb('+', *str);
-	else if (wth <= len && (*str)[0] != ' '
-			&& ft_strchr(lst->str, ' '))
+	else if (lst->flg.wth <= len && (*str)[0] != ' ' && lst->flg.spc)
 	{
-		if ((lst->type == FLT && (count_char(*str, '0') > 1 || (*str)[len - 1] == ' ')) || (lst->type != FLT && len > 1 && wth != 0 && ((*str)[len - 1] == ' ' || (prc == 0 && ((lst->str)[1] == '0' || (lst->str)[0] == '0') && (*str)[0] == '0'))))
+		if ((lst->type == FLT && (count_char(*str, '0') > 1
+						|| (*str)[len - 1] == ' ')) || (lst->type != FLT
+					&& len > 1 && lst->flg.wth != 0 && ((*str)[len - 1] == ' '
+						|| (lst->flg.prc == 0 && lst->flg.zero
+							&& (*str)[0] == '0'))))
 			tmp = offset(' ', *str);
 		else
 			tmp = add_syb(' ', *str);

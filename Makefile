@@ -54,6 +54,8 @@ SRC =	ft_strlen.c \
 		parsing.c \
 		ft_add_char.c \
 		ft_add_symbole.c \
+		no_conv.c \
+		conv_pct.c \
 		conv_s.c \
 		conv_d.c \
 		conv_c.c \

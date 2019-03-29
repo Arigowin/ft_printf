@@ -14,9 +14,7 @@ t_lst		*lst_add(t_lst **lst, t_type type, char *str)
 	new->str = str;
 	new->next = NULL;
 	if (*lst == NULL)
-	{
 		*lst = new;
-	}
 	else
 	{
 		tmp = *lst;

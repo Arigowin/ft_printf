@@ -8,16 +8,6 @@ int			ft_printf(const char *format, ...)
 	int			len;
 
 	lst = NULL;
-	if (format == NULL)
-	{
-		ft_putstr_fd("The firt arg cannot be NULL\n", 2);
-		return (-1);
-	}
-	if (ft_strchr(format, '*') || ft_strchr(format, '$'))
-	{
-		ft_putstr_fd("The flags [*$] are not available", 2);
-		return (-1);
-	}
 	va_start(ap, format);
 	parse(&lst, format);
 	len = print_all(lst, ap);

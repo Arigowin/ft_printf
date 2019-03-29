@@ -3,27 +3,25 @@
 
 double		get_va_arg_f(t_lst *lst, va_list ap)
 {
-	char			*buff;
-
-	if ((buff = ft_strchr(lst->str, 'L')) != NULL)
+	if (lst->flg.L)
 		return (va_arg(ap, long double));
 	return (va_arg(ap, double));
 }
 
-int			reduce_deci(signed long int deci, int prc)
+int			reduce_deci(t_lst *lst, signed long int deci)
 {
 	char	*buff;
 	char	nb;
 	int		i;
 
 	nb = 0;
-	if (prc == 0)
+	if (lst->flg.prc == 0)
 		return (deci);
 	buff = ft_itoa(deci);
 	i = ft_strlen(buff) - 1;
-	while (i >= prc)
+	while (i >= lst->flg.prc)
 	{
-		if (i == prc)
+		if (i == lst->flg.prc)
 			nb = buff[i];
 		buff[i] = ' ';
 		i--;
@@ -35,8 +33,7 @@ int			reduce_deci(signed long int deci, int prc)
 	return (deci);
 }
 
-char		*alloc_str(long double nb, signed long int (*flt)[2],
-		int wth, int prc)
+char		*alloc_str(t_lst *lst, long double nb, signed long int (*flt)[2])
 {
 	int		len;
 
@@ -55,37 +52,37 @@ char		*alloc_str(long double nb, signed long int (*flt)[2],
 		len += 6;
 	else
 	{
-		(*flt)[1] = reduce_deci((*flt)[1], prc);
+		(*flt)[1] = reduce_deci(lst, (*flt)[1]);
 		len += ft_nbrlen((*flt)[1]) + 1;
 	}
-	if (wth < 0)
-		wth = -wth;
-	if (wth > 0 && wth > len)
-		return (ft_strnew(wth + prc + ((*flt)[1] == 0 ? 6 : 0)));
-	return (ft_strnew(len + prc + ((*flt)[1] == 0 ? 6 : 0)));
+	if (lst->flg.wth < 0)
+		lst->flg.wth = -lst->flg.wth;
+	if (lst->flg.wth > 0 && lst->flg.wth > len)
+		return (ft_strnew(lst->flg.wth + lst->flg.prc + (!(*flt)[1] ? 6 : 0)));
+	return (ft_strnew(len + lst->flg.prc + (!(*flt)[1] ? 6 : 0)));
 }
 
-void		raise_deci(char **str, long double nb, int prc)
+void		raise_deci(t_lst *lst, char **str, long double nb)
 {
 	char	*tmp;
 	char	*buff;
 
 	tmp = ft_itoa(nb);
-	if ((int)ft_strlen(tmp) > prc)
+	if ((int)ft_strlen(tmp) > lst->flg.prc)
 	{
 		ft_strcat(*str, tmp);
 		ft_strdel(&tmp);
 		return ;
 	}
-	buff = ft_strnew(prc);
+	buff = ft_strnew(lst->flg.prc);
 	ft_strcat(buff, tmp);
 	ft_strdel(&tmp);
-	ft_add_char_front('0', &buff, prc, ft_strlen(tmp));
+	ft_add_char_front('0', &buff, lst->flg.prc, ft_strlen(tmp));
 	ft_strcat(*str, buff);
 	ft_strdel(&buff);
 }
 
-int			conv_f(t_lst *lst, va_list ap, int wth, int prc)
+int			conv_f(t_lst *lst, va_list ap)
 {
 	char			*str;
 	char			*tmp;
@@ -95,26 +92,27 @@ int			conv_f(t_lst *lst, va_list ap, int wth, int prc)
 	int				len;
 
 	nb = get_va_arg_f(lst, ap);
-	str = alloc_str(nb, &flt, wth, prc);
-	if (wth > 0 && lst->str[0] == '-')
-		wth = -wth;
+	str = alloc_str(lst, nb, &flt);
+	if (lst->flg.wth > 0 && lst->flg.mns)
+		lst->flg.wth = -lst->flg.wth;
 	syb[0] = (nb < 0 ? 1 : ft_remove_char('-', &str));
 	syb[1] = ft_remove_char('+', &str);
-	syb[1] = (ft_strchr(lst->str, '+') ? 1 : syb[1]);
-	if (wth > 0)
-		wth = wth - (syb[1] ? syb[1] : syb[0]);
+	syb[1] = (lst->flg.pls ? 1 : syb[1]);
+	if (lst->flg.wth > 0)
+		lst->flg.wth = lst->flg.wth - (syb[1] ? syb[1] : syb[0]);
 	else
-		wth = wth + (syb[1] ? syb[1] : syb[0]);
+		lst->flg.wth = lst->flg.wth + (syb[1] ? syb[1] : syb[0]);
 	tmp = ft_itoa(flt[0]);
 	ft_strcat(str, tmp);
 	ft_strdel(&tmp);
 	ft_strcat(str, ".");
-	if (flt[1] == 0 && prc == 0)
+	if (flt[1] == 0 && lst->flg.prc == 0)
 		ft_strcat(str, "000000");
 	else
-		raise_deci(&str, flt[1], prc);
-	ft_add_char(lst, &str, wth, 0);
-	ft_add_symbole(lst, &str, wth, prc, syb);
+		raise_deci(lst, &str, flt[1]);
+	lst->flg.prc = 0;
+	ft_add_char(lst, &str);
+	ft_add_symbole(lst, &str, syb);
 	len = ft_strlen(str);
 	ft_putstr(str);
 	ft_strdel(&str);

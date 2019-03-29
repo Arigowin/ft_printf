@@ -3,20 +3,14 @@
 
 long long int	get_va_arg_o(t_lst *lst, va_list ap)
 {
-	char			*buff;
-
-	if ((buff = ft_strchr(lst->str, 'h')) != NULL)
-	{
-		if (*(buff + 1) == 'h')
-			return ((unsigned char)va_arg(ap, unsigned int));
+	if (lst->flg.hh)
+		return ((unsigned char)va_arg(ap, unsigned int));
+	if (lst->flg.h)
 		return ((unsigned short int)va_arg(ap, unsigned int));
-	}
-	if ((buff = ft_strchr(lst->str, 'l')) != NULL)
-	{
-		if (*(buff + 1) == 'l')
-			return (va_arg(ap, unsigned long long int));
+	if (lst->flg.ll)
+		return (va_arg(ap, unsigned long long int));
+	if (lst->flg.l)
 		return (va_arg(ap, unsigned long int));
-	}
 	return (va_arg(ap, unsigned int));
 }
 
@@ -30,7 +24,7 @@ int			search_o(char *str, char *nb)
 	return (0);
 }
 
-void		add_o(char **str, char *nb, int wth)
+void		add_o(t_lst *lst, char **str, char *nb)
 {
 	char	*buff;
 	int		len;
@@ -38,7 +32,8 @@ void		add_o(char **str, char *nb, int wth)
 
 	i = 0;
 	len = ft_strlen(nb);
-	if (wth <= 0 || ((wth < 0 && len >= -wth) || len >= wth))
+	if (lst->flg.wth <= 0 || ((lst->flg.wth < 0 && len >= -lst->flg.wth)
+				|| len >= lst->flg.wth))
 	{
 		if ((*str)[ft_strlen(*str) - 1] == ' ')
 		{
@@ -64,19 +59,15 @@ void		add_o(char **str, char *nb, int wth)
 	}
 }
 
-void		more_o(t_lst *lst, char **str, unsigned int nb, int prc, int wth)
+void		more_o(t_lst *lst, char **str, unsigned int nb)
 {
-	if (prc == 0 && ft_strchr(lst->str, '.')
-			&& nb == 0 && wth != 0)
+	if (!lst->flg.prc && lst->flg.point && !nb && lst->flg.wth)
 		ft_memset(*str, ' ', ft_strlen(*str));
-	else if (prc == 0 && ft_strchr(lst->str, '.')
-			&& nb == 0 && !ft_strchr(lst->str, '#'))
-	{
+	else if (!lst->flg.prc && lst->flg.point && !nb && !lst->flg.sharp)
 		ft_bzero(*str, ft_strlen(*str));
-	}
 }
 
-int			conv_o(t_lst *lst, va_list ap, int wth, int prc)
+int			conv_o(t_lst *lst, va_list ap)
 {
 	char						*str;
 	char						*buff;
@@ -86,16 +77,17 @@ int			conv_o(t_lst *lst, va_list ap, int wth, int prc)
 
 	len = 0;
 	nb = get_va_arg_o(lst, ap);
-	w = (wth < 0 ? -wth : wth);
-	str = (w + prc != 0 && w + prc >= 20 ? ft_strnew(w + prc) : ft_strnew(20));
+	w = (lst->flg.wth < 0 ? -lst->flg.wth : lst->flg.wth);
+	str = (w + lst->flg.prc && w + lst->flg.prc >= 20 ?
+			ft_strnew(w + lst->flg.prc) : ft_strnew(20));
 	ft_prntnum(nb, 8, ' ', str);
 	buff = ft_strdup(str);
-	prc = (prc <  (int)ft_strlen(str) ? 0 : prc);
-	ft_add_char(lst, &str, wth, prc);
-	if (ft_strchr(lst->str, '#') && nb > 0 && search_o(str, buff))
-		add_o(&str, buff, wth);
+	lst->flg.prc = (lst->flg.prc <  (int)ft_strlen(str) ? 0 : lst->flg.prc);
+	ft_add_char(lst, &str);
+	if (lst->flg.sharp && nb > 0 && search_o(str, buff))
+		add_o(lst, &str, buff);
 	ft_strdel(&buff);
-	more_o(lst, &str, nb, prc, wth);
+	more_o(lst, &str, nb);
 	ft_putstr(str);
 	len = ft_strlen(str);
 	ft_strdel(&str);
