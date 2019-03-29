@@ -88,6 +88,7 @@ void		raise_deci(char **str, long double nb, int prc)
 int			conv_f(t_lst *lst, va_list ap, int wth, int prc)
 {
 	char			*str;
+	char			*tmp;
 	long double		nb;
 	signed long int flt[2];
 	int				syb[2];
@@ -104,7 +105,6 @@ int			conv_f(t_lst *lst, va_list ap, int wth, int prc)
 		wth = wth - (syb[1] ? syb[1] : syb[0]);
 	else
 		wth = wth + (syb[1] ? syb[1] : syb[0]);
-	char *tmp;
 	tmp = ft_itoa(flt[0]);
 	ft_strcat(str, tmp);
 	ft_strdel(&tmp);

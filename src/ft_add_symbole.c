@@ -1,5 +1,6 @@
 #include "ft_printf.h"
 
+#include <stdio.h>
 char		*add_syb(char c, char *str)
 {
 	char	*buff;
@@ -45,6 +46,16 @@ char		*offset(char c, char *str)
 	return (tmp);
 }
 
+int			count_char(char *str, char c)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] == c)
+		i++;
+	return (i);
+}
+
 void		ft_add_symbole(t_lst *lst, char **str, int wth, int prc, int syb[2])
 {
 	char	*tmp;
@@ -58,17 +69,10 @@ void		ft_add_symbole(t_lst *lst, char **str, int wth, int prc, int syb[2])
 	else if (wth <= len && (*str)[0] != ' '
 			&& ft_strchr(lst->str, ' '))
 	{
-		if (len > 1 && wth != 0 && ((*str)[len - 1] == ' '
-					|| (prc == 0 && ((lst->str)[1] == '0'
-							|| (lst->str)[0] == '0')
-						&& (*str)[0] == '0')))
-		{
+		if ((lst->type == FLT && (count_char(*str, '0') > 1 || (*str)[len - 1] == ' ')) || (lst->type != FLT && len > 1 && wth != 0 && ((*str)[len - 1] == ' ' || (prc == 0 && ((lst->str)[1] == '0' || (lst->str)[0] == '0') && (*str)[0] == '0'))))
 			tmp = offset(' ', *str);
-		}
 		else
-		{
 			tmp = add_syb(' ', *str);
-		}
 	}
 	else
 		return ;
