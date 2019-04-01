@@ -84,6 +84,7 @@ void				lst_free(t_lst **lst);
 
 size_t				ft_strlen(const char *s);
 size_t				ft_nbrlen(int nb);
+int					ft_strncount(char *str, char c);
 char				*ft_itoa(long long int n);
 char				*ft_itoa_base(int n, int base);
 int					ft_atoi(const char *str);

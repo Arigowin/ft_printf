@@ -61,7 +61,7 @@ int			conv_s(t_lst *lst, va_list ap)
 	else
 		ft_cat(lst, &str, buff, dir);
 	if (lst->flg.prc == 0 && lst->flg.point)
-		ft_bzero(str, ft_strlen(str));
+		ft_memset(str, ' ', ft_strlen(str));
 	len = ft_strlen(str);
 	ft_putstr(str);
 	ft_strdel(&str);

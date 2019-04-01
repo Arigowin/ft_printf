@@ -31,7 +31,7 @@ int			print_flags(t_lst *lst)
 	int		len;
 
 	len = 0;
-	if (lst->flg.spc)
+	if (lst->flg.spc && !lst->flg.pls)
 		len += print_flag(' ');
 	if (lst->flg.sharp)
 		len += print_flag('#');
@@ -41,6 +41,17 @@ int			print_flags(t_lst *lst)
 		len += print_flag('-');
 	if (lst->flg.zero)
 		len += print_flag('0');
+	if (lst->flg.wth)
+	{
+		ft_putnbr((lst->flg.wth < 0 ? -(lst->flg.wth) : lst->flg.wth));
+		len += ft_nbrlen((lst->flg.wth < 0 ? -(lst->flg.wth) : lst->flg.wth));
+	}
+	if (lst->flg.point)
+	{
+		len += print_flag('.');
+		ft_putnbr(lst->flg.prc);
+		len += ft_nbrlen(lst->flg.prc);
+	}
 	return (len);
 }
 
@@ -48,11 +59,11 @@ int			other_conv(t_lst *lst, va_list ap)
 {
 	int		len;
 
+	if (ft_strchr(lst->str, '%'))
+		return (-1);
 	(void)ap;
 	len = 1;
-	remove_char(&(lst->str), "#-+ lhL");
-	if (lst->flg.zero)
-		ft_remove_char('0', &(lst->str));
+	remove_char(&(lst->str), "#-+ lhL.0123456789");
 	ft_putchar('%');
 	len += print_flags(lst);
 	ft_putstr(lst->str);

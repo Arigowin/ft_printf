@@ -9,7 +9,7 @@ int			get_width(t_lst *lst)
 
 	sign = 1;
 	i = 0;
-	while (ft_strchr("#0-+ ", (lst->str)[i]))
+	while (ft_strchr("#0-+ ", (lst->str)[i]) && i < (int)ft_strlen(lst->str))
 		i++;
 	if (lst->flg.mns)
 		sign = -sign;
@@ -48,6 +48,7 @@ t_type		check_type(char c)
 void		parse_1(t_lst **lst, t_type type, char *str)
 {
 	t_lst	*tmp;
+	int		len;
 
 	lst_add(lst, type, str);
 	tmp = *lst;
@@ -63,11 +64,16 @@ void		parse_1(t_lst **lst, t_type type, char *str)
 	tmp->flg.pls = ft_strchr(tmp->str, '+') != NULL;
 	tmp->flg.spc = ft_strchr(tmp->str, ' ') != NULL;
 	tmp->flg.point = ft_strchr(tmp->str, '.') != NULL;
-	tmp->flg.zero = (!tmp->flg.mns && (tmp->str[0] == '0'
-				|| (!ft_isdigit(tmp->str[0]) && (tmp->str[1] == '0'
-						|| (!ft_isdigit(tmp->str[1]) && tmp->str[2] == '0')))));
+	len = ft_strlen(tmp->str);
+	tmp->flg.zero = (!tmp->flg.mns && (tmp->str[0] == '0' || (len > 1
+					&& !ft_isdigit(tmp->str[0]) && tmp->str[0] != '.'
+					&& (tmp->str[1] == '0' || ( len > 2
+							&& !ft_isdigit(tmp->str[1])
+							&& tmp->str[2] == '0')))));
 	tmp->flg.wth = get_width(tmp);
 	tmp->flg.prc = get_precision(tmp->str);
+	if (((type == CHAR || type == STR || type == PTR) && (tmp->flg.hh || tmp->flg.h || tmp->flg.l || tmp->flg.ll)) || (ft_strncount(tmp->str, 'l') > 2 || ft_strncount(tmp->str, 'h') > 2))
+		tmp->type = OTHER;
 }
 
 void		parse_2(t_lst **lst, const char *format, size_t *start, size_t *i)

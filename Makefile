@@ -16,6 +16,7 @@ CFLAGS = -Wall -Wextra -Werror -I $(HPATH) -fPIC -g
 
 SRC =	ft_strlen.c \
 		ft_nbrlen.c \
+		ft_strncount.c \
 		ft_strchr.c \
 		ft_strsub.c \
 		ft_strdup.c \

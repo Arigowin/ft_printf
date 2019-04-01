@@ -2,10 +2,10 @@
 
 void ft_prntnum(unsigned long num, int base, char sign, char *outbuf)
 {
-	int i = 19;
+	int i = 29;
 	int j = 0;
 
-	while(num > 0 || i == 19)
+	while((num > 0 || i == 29))
 	{
 		outbuf[i] = "0123456789abcdef"[num % base];
 		i--;
@@ -16,7 +16,7 @@ void ft_prntnum(unsigned long num, int base, char sign, char *outbuf)
 		outbuf[0] = sign;
 		++j;
 	}
-	while( ++i < 20)
+	while( ++i < 30)
 		outbuf[j++] = outbuf[i];
 	outbuf[j] = 0;
 }

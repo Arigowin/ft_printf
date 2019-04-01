@@ -1,5 +1,19 @@
 #include "ft_printf.h"
 
+void		join_0x(char **str)
+{
+	char	*buff;
+	int		len;
+
+	len = ft_strlen(*str);
+	buff = ft_strnew(len + 2);
+	ft_memcpy(buff + 2, *str, len);
+	buff[0] = '0';
+	buff[1] = 'x';
+	ft_strdel(str);
+	*str = buff;
+}
+
 void		add_0x(void *ptr, char **str)
 {
 	int		i;
@@ -10,6 +24,8 @@ void		add_0x(void *ptr, char **str)
 		return ;
 	while ((*str)[i] == '0')
 		i++;
+	if (i == 0)
+		return (join_0x(str));
 	ft_memset(*str, ' ', i);
 	(*str)[i - 1] = 'x';
 	(*str)[i - 2] = '0';
@@ -37,10 +53,7 @@ int			conv_p(t_lst *lst, va_list ap)
 	else
 		ft_ptr_to_hex(ptr, &buff);
 	ft_memcpy(str, buff, 16);
-	// EDIT
-	if ((lst->str)[0] == '0' || (!ft_isdigit((lst->str)[0])
-				&& (lst->str)[1] == '0'))
-		(lst->str)[((lst->str)[0] == '0' ? 0 : 1)] = ' ';
+	ft_remove_char('0', &(lst->str));
 	add_0x(ptr, &str);
 	ft_add_char(lst, &str);
 	ft_putstr(str);

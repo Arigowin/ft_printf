@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <math.h>
 #include "ft_printf.h"
 
 double		get_va_arg_f(t_lst *lst, va_list ap)
@@ -103,6 +104,11 @@ int			conv_f(t_lst *lst, va_list ap)
 	else
 		lst->flg.wth = lst->flg.wth + (syb[1] ? syb[1] : syb[0]);
 	tmp = ft_itoa(flt[0]);
+	if (nb != nb)
+	{
+		ft_putstr("nan");
+		return (3);
+	}
 	ft_strcat(str, tmp);
 	ft_strdel(&tmp);
 	ft_strcat(str, ".");

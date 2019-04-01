@@ -24,7 +24,7 @@ void				more_add_x(char **str)
 	{
 		while ((*str)[i] && ft_strchr("0123456789abcdef", (*str)[i]))
 			i++;
-		while (i-- > -1)
+		while (i-- > 0)
 			(*str)[i + 2] = (*str)[i];
 		(*str)[0] = '0';
 		(*str)[1] = 'x';
@@ -81,8 +81,8 @@ int					conv_x(t_lst *lst, va_list ap)
 	len = 0;
 	nb = get_va_arg_x(lst, ap);
 	w = (lst->flg.wth < 0 ? -lst->flg.wth : lst->flg.wth);
-	str = (w + lst->flg.prc && w + lst->flg.prc >= 20 ?
-			ft_strnew(w + lst->flg.prc) : ft_strnew(20));
+	str = (w + lst->flg.prc && w + lst->flg.prc >= 30 ?
+			ft_strnew(w + lst->flg.prc) : ft_strnew(30));
 	ft_prntnum(nb, 16, ' ', str);
 	buff = ft_strdup(str);
 	lst->flg.prc = (lst->flg.prc < (int)ft_strlen(str) && nb
