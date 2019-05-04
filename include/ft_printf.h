@@ -91,7 +91,7 @@ void				*ft_memalloc(size_t size);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *s1, const void *s2, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
-void				ft_ptr_to_hex(const void *ptr, char (*res)[15]);
+void				ft_ptr_to_hex(const void *ptr, char (*res)[16]);
 void				ft_strdel(char **as);
 char				*ft_strsub(char const *s, size_t start, size_t len);
 char				*ft_strdup(const char *s1);

@@ -9,7 +9,6 @@ int			conversion_manager(t_lst *lst, va_list ap)
 	int		len;
 
 	len = 0;
-	// SEGFAULT FOR NOW REMOVE THIS AFTER ADD OTHER FLAGS
 	if (lst->type > 11)
 		return (-1);
 	len = fct[lst->type](lst, ap);

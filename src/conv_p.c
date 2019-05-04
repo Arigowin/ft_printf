@@ -38,7 +38,7 @@ void		add_0x(void *ptr, char **str)
 
 int			conv_p(t_lst *lst, va_list ap)
 {
-	char		buff[15];
+	char		buff[16];
 	char		*str;
 	void		*ptr;
 	int			w;
@@ -48,8 +48,9 @@ int			conv_p(t_lst *lst, va_list ap)
 	lst->flg.prc = 0;
 	str = ft_strnew(16 + w);
 	ptr = va_arg(ap, void *);
+	ft_bzero(buff, 16);
 	if (ptr == NULL)
-		ft_memcpy(buff, "(nil)", 16);
+		ft_memcpy(buff, "(nil)", 5);
 	else
 		ft_ptr_to_hex(ptr, &buff);
 	ft_memcpy(str, buff, 16);

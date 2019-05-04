@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <stdint.h>
 
-void		ft_ptr_to_hex(const void *ptr, char (*res)[15])
+void		ft_ptr_to_hex(const void *ptr, char (*res)[16])
 {
 	char	alpha[16];
 	size_t	addr;
