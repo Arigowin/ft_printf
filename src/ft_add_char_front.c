@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "ft_printf.h"
 
 void		ft_add_char_front(char c, char **str, int nb, int len)
@@ -23,4 +22,3 @@ void		ft_add_char_front(char c, char **str, int nb, int len)
 		(*str)[i++] = c;
 	ft_strdel(&cpy);
 }
-

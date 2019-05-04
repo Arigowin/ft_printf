@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "ft_printf.h"
 
 long long int		get_va_arg_x(t_lst *lst, va_list ap)
@@ -20,7 +19,8 @@ void				more_add_x(char **str)
 	int				i;
 
 	i = 0;
-	if ((*str)[ft_strlen(*str) - 1] == ' ' && (*str)[ft_strlen(*str) - 2] == ' ')
+	if ((*str)[ft_strlen(*str) - 1] == ' '
+			&& (*str)[ft_strlen(*str) - 2] == ' ')
 	{
 		while ((*str)[i] && ft_strchr("0123456789abcdef", (*str)[i]))
 			i++;
@@ -58,7 +58,7 @@ void				add_x(t_lst *lst, char **str, char *s2)
 		more_add_x(str);
 }
 
-void				more_x(t_lst *lst, char **str, unsigned long long int nb)
+int					more_x(t_lst *lst, char **str, unsigned long long int nb)
 {
 	if (!lst->flg.prc && lst->flg.point && !nb && lst->flg.wth)
 		ft_memset(*str, ' ', ft_strlen(*str));
@@ -68,6 +68,7 @@ void				more_x(t_lst *lst, char **str, unsigned long long int nb)
 		ft_putstr(*str);
 	else
 		ft_putupper(*str);
+	return (ft_strlen(*str));
 }
 
 int					conv_x(t_lst *lst, va_list ap)
@@ -94,8 +95,7 @@ int					conv_x(t_lst *lst, va_list ap)
 	if (lst->flg.sharp && nb > 0)
 		add_x(lst, &str, buff);
 	ft_strdel(&buff);
-	more_x(lst, &str, nb);
-	len = ft_strlen(str);
+	len = more_x(lst, &str, nb);
 	ft_strdel(&str);
 	return (len);
 }

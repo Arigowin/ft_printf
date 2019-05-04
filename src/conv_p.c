@@ -50,7 +50,7 @@ int			conv_p(t_lst *lst, va_list ap)
 	ptr = va_arg(ap, void *);
 	ft_bzero(buff, 16);
 	if (ptr == NULL)
-		ft_memcpy(buff, "(nil)", 5);
+		ft_memcpy(buff, "0x0", 3);
 	else
 		ft_ptr_to_hex(ptr, &buff);
 	ft_memcpy(str, buff, 16);

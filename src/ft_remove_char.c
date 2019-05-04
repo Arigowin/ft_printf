@@ -23,4 +23,3 @@ int			ft_remove_char(char c, char **str)
 	}
 	return (0);
 }
-

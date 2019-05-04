@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "ft_printf.h"
 
 void		remove_char(char **str, char *s2)

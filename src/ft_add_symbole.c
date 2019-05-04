@@ -15,7 +15,7 @@ char		*add_syb(char c, char *str)
 		return (str);
 	i = 0;
 	j = 0;
-	while (str[i] && i < syb)
+	while (i < syb && str[i])
 		buff[j++] = str[i++];
 	buff[j++] = c;
 	while (str[syb])

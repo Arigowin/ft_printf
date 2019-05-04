@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "ft_printf.h"
 
 long long int	get_va_arg_o(t_lst *lst, va_list ap)
@@ -14,7 +13,7 @@ long long int	get_va_arg_o(t_lst *lst, va_list ap)
 	return (va_arg(ap, unsigned int));
 }
 
-int			search_o(char *str, char *nb)
+int				search_o(char *str, char *nb)
 {
 	char	*tmp;
 
@@ -24,42 +23,7 @@ int			search_o(char *str, char *nb)
 	return (0);
 }
 
-void		add_o(t_lst *lst, char **str, char *nb)
-{
-	char	*buff;
-	int		len;
-	int		i;
-
-	i = 0;
-	len = ft_strlen(nb);
-	if (lst->flg.wth <= 0 || ((lst->flg.wth < 0 && len >= -lst->flg.wth)
-				|| len >= lst->flg.wth))
-	{
-		if ((*str)[ft_strlen(*str) - 1] == ' ')
-		{
-			(*str)[0] = '0';
-			i = -1;
-			while (nb[++i])
-				(*str)[i + 1] = nb[i];
-		}
-		else
-		{
-			buff = ft_strnew(ft_strlen(*str) + 1);
-			buff[0] = '0';
-			ft_memcpy(buff + 1, *str, ft_strlen(*str));
-			ft_strdel(str);
-			*str = buff;
-		}
-	}
-	else
-	{
-		while ((*str)[i] && !ft_isdigit((*str)[i]))
-			i++;
-		(*str)[(i <= 0 ? 0 : i - 1)] = '0';
-	}
-}
-
-void		more_o(t_lst *lst, char **str, unsigned int nb)
+void			more_o(t_lst *lst, char **str, unsigned int nb)
 {
 	if (!lst->flg.prc && lst->flg.point && !nb && lst->flg.wth)
 		ft_memset(*str, ' ', ft_strlen(*str));
@@ -67,7 +31,7 @@ void		more_o(t_lst *lst, char **str, unsigned int nb)
 		ft_bzero(*str, ft_strlen(*str));
 }
 
-int			conv_o(t_lst *lst, va_list ap)
+int				conv_o(t_lst *lst, va_list ap)
 {
 	char						*str;
 	char						*buff;
@@ -82,7 +46,7 @@ int			conv_o(t_lst *lst, va_list ap)
 			ft_strnew(w + lst->flg.prc) : ft_strnew(30));
 	ft_prntnum(nb, 8, ' ', str);
 	buff = ft_strdup(str);
-	lst->flg.prc = (lst->flg.prc <  (int)ft_strlen(str) ? 0 : lst->flg.prc);
+	lst->flg.prc = (lst->flg.prc < (int)ft_strlen(str) ? 0 : lst->flg.prc);
 	ft_add_char(lst, &str);
 	if (lst->flg.sharp && nb > 0 && search_o(str, buff))
 		add_o(lst, &str, buff);

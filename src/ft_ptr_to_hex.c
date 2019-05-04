@@ -1,6 +1,4 @@
 #include "ft_printf.h"
-#include <unistd.h>
-#include <stdint.h>
 
 void		ft_ptr_to_hex(const void *ptr, char (*res)[16])
 {

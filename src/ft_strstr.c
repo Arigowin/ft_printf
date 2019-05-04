@@ -1,4 +1,3 @@
-#include <string.h>
 #include "ft_printf.h"
 
 char			*ft_strstr(const char *s1, const char *s2)

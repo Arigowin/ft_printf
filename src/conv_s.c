@@ -1,5 +1,10 @@
-#include <stdlib.h>
 #include "ft_printf.h"
+
+void		nullinbuff(char **str, char **buff)
+{
+	ft_bzero(*str, ft_strlen(*str) + 1);
+	*buff = "(null)";
+}
 
 void		reduce(t_lst *lst, char **str, char *s2, int dir)
 {
@@ -41,22 +46,17 @@ int			conv_s(t_lst *lst, va_list ap)
 	int			dir;
 	int			len;
 
-	dir = 0;
+	dir = (lst->flg.wth < 0 ? 1 : 0);
 	if (lst->flg.wth < 0)
-	{
-		dir++;
 		lst->flg.wth = -lst->flg.wth;
-	}
 	buff = va_arg(ap, char *);
 	if (NULL == (str = ft_strnew(1 + lst->flg.wth + ft_strlen(buff))))
 		return (-1);
 	if (buff == NULL && (lst->flg.prc >= 6 || lst->flg.prc == 0))
-	{
-		ft_bzero(str, ft_strlen(str) + 1);
-		buff = "(null)";
-	}
+		nullinbuff(&str, &buff);
 	ft_add_n_char(&str, ' ', lst->flg.wth);
-	if (lst->flg.prc > 0 && ft_strlen(buff) > 0 && lst->flg.prc < (int)ft_strlen(buff))
+	len = ft_strlen(buff);
+	if (lst->flg.prc > 0 && len > 0 && lst->flg.prc < len)
 		reduce(lst, &str, buff, dir);
 	else
 		ft_cat(lst, &str, buff, dir);
@@ -67,4 +67,3 @@ int			conv_s(t_lst *lst, va_list ap)
 	ft_strdel(&str);
 	return (len);
 }
-

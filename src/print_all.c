@@ -1,5 +1,3 @@
-#include <unistd.h>
-#include <stdlib.h>
 #include "ft_printf.h"
 
 int			print_all(t_lst *lst, va_list ap)

@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "ft_printf.h"
 
 long long int	get_va_arg_d(t_lst *lst, va_list ap)
@@ -14,7 +13,7 @@ long long int	get_va_arg_d(t_lst *lst, va_list ap)
 	return (va_arg(ap, int));
 }
 
-char		*alloc_buff(t_lst *lst, long long int nb)
+char			*alloc_buff(t_lst *lst, long long int nb)
 {
 	char	*buff;
 	char	*tmp;
@@ -33,7 +32,7 @@ char		*alloc_buff(t_lst *lst, long long int nb)
 	return (buff);
 }
 
-void		more_d(t_lst *lst, char **str, int nb)
+void			more_d(t_lst *lst, char **str, int nb)
 {
 	if (!lst->flg.prc && lst->flg.point && !nb && lst->flg.wth)
 		ft_memset(*str, ' ', ft_strlen(*str));
@@ -41,7 +40,7 @@ void		more_d(t_lst *lst, char **str, int nb)
 		ft_bzero(*str, ft_strlen(*str));
 }
 
-int			conv_d(t_lst *lst, va_list ap)
+int				conv_d(t_lst *lst, va_list ap)
 {
 	char			*str;
 	long long int	nb;

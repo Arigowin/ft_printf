@@ -53,6 +53,7 @@ SRC =	ft_strlen.c \
 		ft_prntnum.c \
 		chaining_list.c \
 		parsing.c \
+		parsing2.c \
 		ft_add_char.c \
 		ft_add_symbole.c \
 		no_conv.c \
@@ -63,9 +64,11 @@ SRC =	ft_strlen.c \
 		conv_c.c \
 		conv_p.c \
 		conv_o.c \
+		conv_o2.c \
 		conv_u.c \
 		conv_x.c \
 		conv_f.c \
+		conv_f2.c \
 		conversion_manager.c \
 		print_all.c \
 		ft_printf.c

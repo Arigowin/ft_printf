@@ -26,7 +26,7 @@ typedef struct		s_flags
 	int				h;
 	int				ll;
 	int				l;
-	int				L;
+	int				upperl;
 	int				sharp;
 	int				zero;
 	int				mns;
@@ -49,6 +49,8 @@ typedef struct		s_lst
 int					ft_printf(const char *format, ...);
 
 void				parse(t_lst **lst, const char *format);
+int					get_width(t_lst *lst);
+int					get_precision(char *str);
 int					print_all(t_lst *lst, va_list ap);
 int					conversion_manager(t_lst *lst, va_list ap);
 int					no_conv(t_lst *lst, va_list ap);
@@ -59,9 +61,12 @@ int					conv_d(t_lst *lst, va_list ap);
 int					conv_c(t_lst *lst, va_list ap);
 int					conv_p(t_lst *lst, va_list ap);
 int					conv_o(t_lst *lst, va_list ap);
+void				add_o(t_lst *lst, char **str, char *nb);
 int					conv_u(t_lst *lst, va_list ap);
 int					conv_x(t_lst *lst, va_list ap);
 int					conv_f(t_lst *lst, va_list ap);
+char				*alloc_str(t_lst *lst, long double nb,
+								signed long int (*flt)[2]);
 
 void				ft_add_char(t_lst *lst, char **str);
 void				ft_add_symbole(t_lst *lst, char **str, int syb[2]);
