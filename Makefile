@@ -12,7 +12,7 @@ OPATH =		$(ROOT)/obj
 CPATH =		$(ROOT)/src
 HPATH =		$(ROOT)/include
 
-CFLAGS = -Wall -Wextra -Werror -I $(HPATH) -fPIC -g
+CFLAGS = -Wall -Wextra -Werror -I $(HPATH) -fPIC
 
 SRC =	ft_strlen.c \
 		ft_nbrlen.c \
@@ -79,7 +79,7 @@ OBJ = $(patsubst %.c, $(OPATH)/%.o, $(SRC))
 
 all: $(OPATH) $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OPATH) $(OBJ)
 	@echo "$(NAME) : Building $@"
 	@$(AR) rc $@ $(OBJ)
 	@$(RANLIB) $@
@@ -103,4 +103,9 @@ fclean: clean
 	@echo "\033[32mDone !\033[0m"
 
 re: fclean all
+
+test: all
+	@gcc main.c -I./include -L. -lftprintf
+	@./a.out
+	@rm a.out
 
