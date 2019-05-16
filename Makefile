@@ -106,7 +106,7 @@ fclean: clean
 re: fclean all
 
 test: all
-	@gcc main.c -I./include -L. -lftprintf
+	@gcc test.c -I./include -L. -lftprintf
 	@./a.out
 	@rm a.out
 
