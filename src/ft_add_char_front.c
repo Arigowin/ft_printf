@@ -7,7 +7,7 @@ void		ft_add_char_front(char c, char **str, int nb, int len)
 	int		j;
 
 	i = 0;
-	j = nb - len;
+	j = (nb - len <= 0 ? 0 : nb - len);
 	cpy = ft_strnew(len);
 	ft_memcpy(cpy, *str, len);
 	while (i < len)

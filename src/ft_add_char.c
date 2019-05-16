@@ -6,14 +6,22 @@ void		ft_add_char(t_lst *lst, char **str)
 
 	len = (int)ft_strlen(*str);
 	if (lst->flg.prc > 0)
+	{
 		ft_add_char_front('0', str, lst->flg.prc, len);
+	}
 	len = (int)ft_strlen(*str);
 	if (lst->flg.wth && !lst->flg.prc && lst->flg.wth > len
 			&& (lst->type == FLT || !lst->flg.point) && lst->flg.zero)
+	{
 		ft_add_char_front('0', str, lst->flg.wth, len);
+	}
 	else if (lst->flg.wth && lst->flg.wth > len)
+	{
 		ft_add_char_front(' ', str, lst->flg.wth, len);
+	}
 	len = (int)ft_strlen(*str);
 	if (lst->flg.wth < 0)
+	{
 		ft_add_char_back(' ', str, -(lst->flg.wth) - len, len);
+	}
 }

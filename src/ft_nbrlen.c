@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-size_t		ft_nbrlen(int nb)
+size_t		ft_nbrlen(long long int nb)
 {
 	char	*tmp;
 	int		len;

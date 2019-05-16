@@ -86,7 +86,7 @@ t_lst				*lst_add(t_lst **lst, t_type type, char *str);
 void				lst_free(t_lst **lst);
 
 size_t				ft_strlen(const char *s);
-size_t				ft_nbrlen(int nb);
+size_t				ft_nbrlen(long long int nb);
 int					ft_strncount(char *str, char c);
 char				*ft_itoa(long long int n);
 char				*ft_itoa_base(int n, int base);
@@ -101,6 +101,7 @@ void				ft_strdel(char **as);
 char				*ft_strsub(char const *s, size_t start, size_t len);
 char				*ft_strdup(const char *s1);
 char				*ft_strstr(const char *s1, const char *s2);
+char				*ft_strcpy(char *s1, const char *s2);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strcat(char *s1, const char *s2);
