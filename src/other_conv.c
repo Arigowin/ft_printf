@@ -61,11 +61,9 @@ int			other_conv(t_lst *lst, va_list ap)
 	if (ft_strchr(lst->str, '%'))
 		return (-1);
 	(void)ap;
-	len = 1;
 	remove_char(&(lst->str), "#-+ lhL.0123456789");
-	ft_putchar('%');
-	len += print_flags(lst);
-	ft_putstr(lst->str);
-	len += ft_strlen(lst->str);
+	/* ft_putstr(lst->str); */
+	/* len += ft_strlen(lst->str) - 1; */
+	len = conv_s_body(lst, lst->str);
 	return (len);
 }

@@ -39,21 +39,6 @@ int			notanumber(long double nb)
 	return (0);
 }
 
-void		ft_add_front_zero(t_lst *lst, char **str)
-{
-	char		*buff;
-
-	if (ft_strlen(*str) < (size_t)lst->flg.wth)
-	{
-		buff = ft_strnew(lst->flg.wth);
-		ft_memset(buff, '0', lst->flg.wth - ft_strlen(*str));
-		ft_strcat(buff, *str);
-		ft_bzero(*str, lst->flg.wth);
-		ft_strcpy(*str, buff);
-		ft_strdel(&buff);
-	}
-}
-
 int			more_f(t_lst *lst, char **str, signed long int flt[2], int syb[2])
 {
 	int		len;

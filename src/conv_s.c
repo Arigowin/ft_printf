@@ -39,9 +39,8 @@ void		ft_cat(t_lst *lst, char **str, char *s2, int dir)
 	ft_memcpy((*str) + j, s2, len);
 }
 
-int			conv_s(t_lst *lst, va_list ap)
+int			conv_s_body(t_lst *lst, char *buff)
 {
-	char		*buff;
 	char		*str;
 	int			dir;
 	int			len;
@@ -49,12 +48,11 @@ int			conv_s(t_lst *lst, va_list ap)
 	dir = (lst->flg.wth < 0 ? 1 : 0);
 	if (lst->flg.wth < 0)
 		lst->flg.wth = -lst->flg.wth;
-	buff = va_arg(ap, char *);
 	if (NULL == (str = ft_strnew(1 + lst->flg.wth + ft_strlen(buff))))
 		return (-1);
 	if (buff == NULL && (lst->flg.prc >= 6 || lst->flg.prc == 0))
 		nullinbuff(&str, &buff);
-	ft_add_n_char(&str, ' ', lst->flg.wth);
+	ft_add_n_char(&str, (lst->flg.zero ? '0' : ' '), lst->flg.wth);
 	len = ft_strlen(buff);
 	if (lst->flg.prc > 0 && len > 0 && lst->flg.prc < len)
 		reduce(lst, &str, buff, dir);
@@ -65,5 +63,15 @@ int			conv_s(t_lst *lst, va_list ap)
 	len = ft_strlen(str);
 	ft_putstr(str);
 	ft_strdel(&str);
+	return (len);
+}
+
+int			conv_s(t_lst *lst, va_list ap)
+{
+	char		*buff;
+	int			len;
+
+	buff = va_arg(ap, char *);
+	len = conv_s_body(lst, buff);
 	return (len);
 }

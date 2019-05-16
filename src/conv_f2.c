@@ -53,3 +53,18 @@ char		*alloc_str(t_lst *lst, long double nb, signed long int (*flt)[2])
 		return (ft_strnew(lst->flg.wth + lst->flg.prc + (!(*flt)[1] ? 6 : 0)));
 	return (ft_strnew(len + lst->flg.prc + (!(*flt)[1] ? 6 : 0)));
 }
+
+void		ft_add_front_zero(t_lst *lst, char **str)
+{
+	char		*buff;
+
+	if (ft_strlen(*str) < (size_t)lst->flg.wth)
+	{
+		buff = ft_strnew(lst->flg.wth);
+		ft_memset(buff, '0', lst->flg.wth - ft_strlen(*str));
+		ft_strcat(buff, *str);
+		ft_bzero(*str, lst->flg.wth);
+		ft_strcpy(*str, buff);
+		ft_strdel(&buff);
+	}
+}

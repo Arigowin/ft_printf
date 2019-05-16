@@ -57,6 +57,7 @@ int					no_conv(t_lst *lst, va_list ap);
 int					other_conv(t_lst *lst, va_list ap);
 int					conv_pct(t_lst *lst, va_list ap);
 int					conv_s(t_lst *lst, va_list ap);
+int					conv_s_body(t_lst *lst, char *buff);
 int					conv_d(t_lst *lst, va_list ap);
 int					conv_c(t_lst *lst, va_list ap);
 int					conv_p(t_lst *lst, va_list ap);
@@ -67,6 +68,7 @@ int					conv_x(t_lst *lst, va_list ap);
 int					conv_f(t_lst *lst, va_list ap);
 char				*alloc_str(t_lst *lst, long double nb,
 								signed long int (*flt)[2]);
+void				ft_add_front_zero(t_lst *lst, char **str);
 
 void				ft_add_char(t_lst *lst, char **str);
 void				ft_add_symbole(t_lst *lst, char **str, int syb[2]);
