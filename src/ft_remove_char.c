@@ -1,3 +1,4 @@
+#include <libft.h>
 #include "ft_printf.h"
 
 int			ft_remove_char(char c, char **str)

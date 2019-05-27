@@ -1,3 +1,4 @@
+#include <libft.h>
 #include "ft_printf.h"
 
 void		nullinbuff(char **str, char **buff)

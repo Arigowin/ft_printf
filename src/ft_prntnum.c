@@ -1,3 +1,4 @@
+#include <libft.h>
 #include "ft_printf.h"
 
 void		ft_prntnum(unsigned long num, int base, char sign, char *outbuf)

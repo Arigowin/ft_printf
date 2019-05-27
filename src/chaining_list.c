@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <libft.h>
 #include "ft_printf.h"
 
 t_lst		*lst_add(t_lst **lst, t_type type, char *str)

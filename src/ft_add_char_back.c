@@ -1,3 +1,4 @@
+#include <libft.h>
 #include "ft_printf.h"
 
 void		ft_add_char_back(char c, char **str, int nb, int start)

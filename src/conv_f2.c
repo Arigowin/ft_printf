@@ -1,3 +1,4 @@
+#include <libft.h>
 #include "ft_printf.h"
 
 int			reduce_deci(t_lst *lst, signed long int deci)

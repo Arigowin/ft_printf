@@ -1,3 +1,4 @@
+#include <libft.h>
 #include "printf.h"
 
 int					ft_strncount(char *str, char c)

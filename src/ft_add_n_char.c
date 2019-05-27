@@ -1,3 +1,4 @@
+#include <libft.h>
 #include "ft_printf.h"
 
 void		ft_add_n_char(char **str, char c, int n)

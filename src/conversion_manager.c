@@ -1,3 +1,4 @@
+#include <libft.h>
 #include "ft_printf.h"
 
 int			conversion_manager(t_lst *lst, va_list ap)

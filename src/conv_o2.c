@@ -1,3 +1,4 @@
+#include <libft.h>
 #include "ft_printf.h"
 
 void			add_o2(char **str)
