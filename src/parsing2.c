@@ -1,5 +1,4 @@
 #include <libft.h>
-#include <libft.h>
 #include "ft_printf.h"
 
 int			get_width(t_lst *lst)

@@ -1,5 +1,4 @@
 #include <libft.h>
-#include <libft.h>
 #include "ft_printf.h"
 
 t_type		check_type(char c)
