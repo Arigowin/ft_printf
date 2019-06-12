@@ -40,6 +40,7 @@ SRC =	chaining_list.c \
 		ft_print_n_char.c \
 		ft_printf.c \
 		ft_prntnum.c \
+		ft_lltoa.c \
 		ft_ptr_to_hex.c \
 		ft_putupper.c \
 		ft_remove_char.c \
@@ -134,7 +135,7 @@ LIB_OBJ = $(patsubst %.c, $(LIBOPATH)/%.o, $(LIB_SRC))
 
 all: $(OPATH) $(LIBOPATH) $(NAME)
 
-$(NAME): $(OBJ) $(LIB_OBJ)
+$(NAME): $(OPATH) $(LIBOPATH) $(OBJ) $(LIB_OBJ)
 	@echo "$(NAME) : Building $@"
 	@$(AR) rc $@ $(OBJ) $(LIB_OBJ)
 	@$(RANLIB) $@
@@ -153,7 +154,7 @@ $(OPATH):
 	@$(MKDIR) $@
 
 $(LIBOPATH):
-	@echo "$(NAME) : Creating objs directory"
+	@echo "$(NAME) : Creating lib objs directory"
 	@$(MKDIR) $@
 
 clean:
@@ -162,6 +163,7 @@ clean:
 	@$(RM) -Rf $(LIBOPATH)
 
 fclean: clean
+	@make fclean -C $(LIBPATH)
 	@echo "$(NAME) : Deleting $(NAME)"
 	@$(RM) -f $(NAME)
 	@echo "\033[32mDone !\033[0m"

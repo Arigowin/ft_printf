@@ -6,7 +6,7 @@
 #    By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/23 13:01:21 by dolewski          #+#    #+#              #
-#    Updated: 2016/02/16 18:23:06 by dolewski         ###   ########.fr        #
+#    Updated: 2019/06/12 09:51:07 by dolewski         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,7 +114,7 @@ HPATH =		$(ROOT)/includes
 
 all: $(OPATH) $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OPATH) $(OBJ)
 	@echo "$(NAME) : Building $@"
 	@$(AR) rc $@ $(OBJ)
 	@$(RANLIB) $@

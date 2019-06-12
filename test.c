@@ -12,7 +12,7 @@ int		main(void)
 	setbuf(stdout, NULL);
 
 	printf("-------------------------------------\n");
-	ft_printf("(\"abc %%% [%%c] [%%s] [%%p] def\\n\", 0, NULL, NULL)\n");
+	ft_printf("(\"abc %%%% [%%c] [%%s] [%%p] def\\n\", 0, NULL, NULL)\n");
 	r1 = printf("abc %% [%c] [%s] [%p] def\n", 0, NULL, NULL);
 	r2 = ft_printf("abc %% [%c] [%s] [%p] def\n", 0, NULL, NULL);
 	printf("%d, %d\n", r1, r2);
@@ -98,7 +98,6 @@ int		main(void)
 	r1 = printf("abc [%x] [%#x] [%#o] [%#o]\n", 10, 10, 10, 10);
 	r2 = ft_printf("abc [%x] [%#x] [%#o] [%#o]\n", 10, 10, 10, 10);
 	printf("%d, %d\n", r1, r2);
-	printf("-------------------------------------\n");
 
 	return (0);
 }

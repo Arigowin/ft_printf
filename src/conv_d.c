@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   conv_d.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/12 09:00:07 by dolewski          #+#    #+#             */
+/*   Updated: 2019/06/12 09:41:13 by dolewski         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libft.h>
 #include "ft_printf.h"
 
@@ -22,7 +34,7 @@ char			*alloc_buff(t_lst *lst, long long int nb)
 
 	if (lst->flg.wth < 0)
 		lst->flg.wth = -lst->flg.wth;
-	tmp = ft_itoa(nb);
+	tmp = ft_lltoa(nb);
 	len = ft_strlen(tmp);
 	if (lst->flg.wth + lst->flg.prc > len)
 		buff = ft_strnew(lst->flg.wth + lst->flg.prc);
@@ -33,7 +45,7 @@ char			*alloc_buff(t_lst *lst, long long int nb)
 	return (buff);
 }
 
-void			more_d(t_lst *lst, char **str, int nb)
+void			more_d(t_lst *lst, char **str, long long int nb)
 {
 	if (!lst->flg.prc && lst->flg.point && !nb && lst->flg.wth)
 		ft_memset(*str, ' ', ft_strlen(*str));

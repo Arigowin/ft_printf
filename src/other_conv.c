@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   other_conv.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/12 09:00:11 by dolewski          #+#    #+#             */
+/*   Updated: 2019/06/12 09:00:11 by dolewski         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libft.h>
 #include "ft_printf.h"
 
@@ -63,8 +75,6 @@ int			other_conv(t_lst *lst, va_list ap)
 		return (-1);
 	(void)ap;
 	remove_char(&(lst->str), "#-+ lhL.0123456789");
-	/* ft_putstr(lst->str); */
-	/* len += ft_strlen(lst->str) - 1; */
 	len = conv_s_body(lst, lst->str);
 	return (len);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/12 09:00:12 by dolewski          #+#    #+#             */
+/*   Updated: 2019/06/12 09:41:54 by dolewski         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -85,6 +97,7 @@ void				ft_add_n_char(char **str, char c, int n);
 void				ft_add_char_front(char c, char **str, int nb, int len);
 void				ft_add_char_back(char c, char **str, int nb, int start);
 int					ft_remove_char(char c, char **str);
+char				*ft_lltoa(long long int n);
 void				ft_prntnum(unsigned long n, int b, char s, char *o);
 
 #endif
